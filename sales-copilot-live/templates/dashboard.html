@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloseCue AI Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">CloseCue AI</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/live-call">Live Demo</a>
+    </nav>
+  </header>
+
+  <main class="dashboard-shell">
+    <section class="page-heading">
+      <p class="eyebrow">Sales command dashboard</p>
+      <h1>Live call performance</h1>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <span>Total live calls</span>
+        <strong>18</strong>
+      </article>
+      <article class="stat-card">
+        <span>Average close probability</span>
+        <strong>61%</strong>
+      </article>
+      <article class="stat-card">
+        <span>Most common objection</span>
+        <strong>Price</strong>
+      </article>
+      <article class="stat-card">
+        <span>Demo calls completed</span>
+        <strong>7</strong>
+      </article>
+    </section>
+
+    <section class="recent-calls">
+      <div class="section-title">
+        <h2>Recent calls</h2>
+        <a class="button small" href="/live-call">Start Demo</a>
+      </div>
+      <div class="call-card-list">
+        <article class="call-card">
+          <div>
+            <h3>Acme Revenue Team</h3>
+            <p>Price objection handled with ROI framing.</p>
+          </div>
+          <strong>68%</strong>
+        </article>
+        <article class="call-card">
+          <div>
+            <h3>Northstar SaaS</h3>
+            <p>Customer asked for proof and agreed to a pilot demo.</p>
+          </div>
+          <strong>74%</strong>
+        </article>
+        <article class="call-card">
+          <div>
+            <h3>Pipeline Works</h3>
+            <p>Competitor comparison surfaced during discovery.</p>
+          </div>
+          <strong>52%</strong>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

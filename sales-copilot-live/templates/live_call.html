@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloseCue AI Live Call</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="live-body">
+  <header class="live-topbar">
+    <a class="brand" href="/">CloseCue AI</a>
+    <div class="call-meta">
+      <span id="callStatus" class="status-pill inactive">Call Inactive</span>
+      <span id="timer">00:00</span>
+      <span id="micStatus">Mic idle</span>
+    </div>
+    <div class="call-actions">
+      <button id="startCall" class="button primary" type="button">Start Call</button>
+      <button id="stopCall" class="button danger" type="button">Stop Call</button>
+    </div>
+  </header>
+
+  <main class="live-grid">
+    <section class="panel transcript-panel">
+      <div class="panel-header">
+        <h1>Live transcript</h1>
+        <span id="lineCount">0 lines</span>
+      </div>
+      <div id="transcriptFeed" class="transcript-feed"></div>
+    </section>
+
+    <section class="panel teleprompter-panel">
+      <div class="panel-header">
+        <h1>AI teleprompter</h1>
+        <span id="suggestionState">Waiting</span>
+      </div>
+      <div id="suggestedResponse" class="suggested-response">Start the demo call to receive live suggested responses.</div>
+      <div class="teleprompter-actions">
+        <button id="copyResponse" class="button" type="button">Copy Response</button>
+        <button id="refreshSuggestion" class="button ghost-dark" type="button">Refresh Suggestion</button>
+      </div>
+    </section>
+
+    <aside class="panel insight-panel">
+      <div class="panel-header">
+        <h1>Customer insights</h1>
+      </div>
+      <dl class="insight-list">
+        <div><dt>Detected objection</dt><dd id="objection">None</dd></div>
+        <div><dt>Sentiment</dt><dd id="sentiment">Neutral</dd></div>
+        <div><dt>Close probability</dt><dd id="closeProbability">35%</dd></div>
+        <div><dt>Customer intent</dt><dd id="customerIntent">Exploring fit</dd></div>
+        <div><dt>Recommended next action</dt><dd id="nextAction">Ask discovery question</dd></div>
+        <div><dt>Urgency level</dt><dd id="urgencyLevel">Medium</dd></div>
+      </dl>
+    </aside>
+  </main>
+
+  <section class="bottom-grid">
+    <article class="panel">
+      <h2>Call notes</h2>
+      <textarea id="callNotes" placeholder="Add private notes during the call..."></textarea>
+    </article>
+    <article class="panel">
+      <h2>Post-call summary</h2>
+      <div id="summaryArea" class="summary-box">Stop the call to generate a mock summary.</div>
+    </article>
+    <article class="panel">
+      <h2>Key moments</h2>
+      <ul id="keyMoments" class="key-moments"></ul>
+    </article>
+  </section>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="{{ url_for('static', filename='js/live_call.js') }}"></script>
+</body>
+</html>

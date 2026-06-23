@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloseCue AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">CloseCue AI</a>
+    <nav>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/live-call">Live Demo</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Live sales call intelligence</p>
+        <h1>Real-Time AI Sales Teleprompter</h1>
+        <p class="hero-subtitle">CloseCue AI listens during live sales calls and tells reps what to say next.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="/live-call">Launch Live Demo</a>
+          <a class="button ghost" href="/dashboard">View Dashboard</a>
+        </div>
+      </div>
+      <div class="hero-signal" aria-label="CloseCue AI live suggestion preview">
+        <div class="signal-top">
+          <span class="pulse"></span>
+          <span>Call Active</span>
+        </div>
+        <p class="prompt-preview">“I understand the price concern. Would it help if I showed how this pays for itself based on your current call volume?”</p>
+        <div class="meter">
+          <span>Close probability</span>
+          <strong>72%</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-grid">
+      <article>
+        <h2>Live call listening</h2>
+        <p>Built for active conversations with browser microphone and phone-call streaming paths ready to plug in.</p>
+      </article>
+      <article>
+        <h2>Objection detection</h2>
+        <p>Flags price, hesitation, competitor mentions, proof requests, and other moments reps need to handle fast.</p>
+      </article>
+      <article>
+        <h2>AI teleprompter</h2>
+        <p>Turns conversation context into clear suggested language the rep can use immediately.</p>
+      </article>
+      <article>
+        <h2>Sentiment scoring</h2>
+        <p>Tracks customer mood so reps know when to slow down, validate, or move toward next steps.</p>
+      </article>
+      <article>
+        <h2>Close probability</h2>
+        <p>Shows a live confidence score based on buying signals, objections, and recent conversation turns.</p>
+      </article>
+      <article>
+        <h2>Post-call summaries</h2>
+        <p>Captures key moments, objections, next actions, and follow-up direction after the call ends.</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
