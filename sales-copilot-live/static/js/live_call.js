@@ -36,8 +36,10 @@ const sentiment = document.getElementById("sentiment");
 const closeProbability = document.getElementById("closeProbability");
 const callHealth = document.getElementById("callHealth");
 const customerIntent = document.getElementById("customerIntent");
+const buyingSignal = document.getElementById("buyingSignal");
 const nextAction = document.getElementById("nextAction");
 const urgencyLevel = document.getElementById("urgencyLevel");
+const confidenceScore = document.getElementById("confidenceScore");
 const summaryArea = document.getElementById("summaryArea");
 const keyMoments = document.getElementById("keyMoments");
 const schedulingPanel = document.getElementById("schedulingPanel");
@@ -46,6 +48,7 @@ const schedulePrompt = document.getElementById("schedulePrompt");
 const meetingTitle = document.getElementById("meetingTitle");
 const meetingTime = document.getElementById("meetingTime");
 const meetingAgenda = document.getElementById("meetingAgenda");
+const copySchedule = document.getElementById("copySchedule");
 
 function setActiveState(isActive) {
   callActive = isActive;
@@ -142,8 +145,10 @@ function updateSuggestion(data) {
   closeProbability.textContent = `${data.close_probability}%`;
   callHealth.textContent = data.call_health || "Stable";
   customerIntent.textContent = data.customer_intent;
+  buyingSignal.textContent = data.buying_signal || "None";
   nextAction.textContent = data.next_action;
   urgencyLevel.textContent = data.urgency_level;
+  confidenceScore.textContent = `Confidence ${Math.max(58, data.close_probability || 74)}%`;
   suggestionState.textContent = "Updated";
 
   if (data.scheduling_intent) {
@@ -208,6 +213,15 @@ copyResponse.addEventListener("click", async () => {
 
 refreshSuggestion.addEventListener("click", () => {
   socket.emit("request_ai_suggestion");
+});
+
+copySchedule.addEventListener("click", async () => {
+  const text = `${meetingTitle.textContent}\n${meetingTime.textContent}\n${meetingAgenda.textContent}`;
+  await navigator.clipboard.writeText(text);
+  copySchedule.textContent = "Copied";
+  setTimeout(() => {
+    copySchedule.textContent = "Copy scheduling message";
+  }, 1200);
 });
 
 socket.on("connect", () => {

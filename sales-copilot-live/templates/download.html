@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download | Loading...</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body class="download-page">
+  <header class="site-nav nav-transparent" data-nav>
+    <a class="brand-mark" href="/">Loading...</a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="/">Product</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/login">Login</a>
+    </nav>
+    <a class="mac-cta nav-button" href="/download">Get for Mac</a>
+  </header>
+
+  <main class="download-hero">
+    <div class="sun-glow"></div>
+    <div class="download-copy">
+      <span class="pill-label">Mac app</span>
+      <h1>Get Loading... for Mac</h1>
+      <p>Run your live sales copilot as a desktop overlay during calls.</p>
+      <div class="hero-actions">
+        <button class="mac-cta hero-button" type="button">Download for Mac - Coming Soon</button>
+        <a class="secondary-cta" href="/signup">Launch Web Demo</a>
+      </div>
+    </div>
+    <div class="download-preview float-soft">
+      <div class="assistant-bar">
+        <span class="assistant-orb"></span>
+        <button type="button">Visible to you</button>
+        <button type="button">Sales call</button>
+      </div>
+      <div class="mac-window app-preview-window">
+        <div class="window-chrome">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="window-title">Loading... overlay</span>
+        </div>
+        <div class="overlay-preview">
+          <span>AI Response</span>
+          <p>Price concern detected. Ask whether ROI, timing, or implementation risk is the biggest blocker.</p>
+          <div class="keyboard-row">
+            <kbd>command</kbd><kbd>enter</kbd><kbd>assist</kbd>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

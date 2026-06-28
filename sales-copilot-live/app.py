@@ -56,6 +56,11 @@ def pricing():
     return render_template("pricing.html")
 
 
+@app.route("/download")
+def download():
+    return render_template("download.html")
+
+
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":

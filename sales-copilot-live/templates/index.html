@@ -3,91 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loading... | Real-time AI sales teleprompter</title>
+  <title>Loading... | Live AI sales copilot</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 </head>
-<body>
-  <header class="site-header marketing-header">
-    <a class="brand" href="/">Loading...</a>
-    <nav>
+<body class="marketing-page">
+  <header class="site-nav nav-transparent" data-nav>
+    <a class="brand-mark" href="/">Loading...</a>
+    <nav class="nav-links" aria-label="Primary navigation">
       <a href="#product">Product</a>
-      <a href="#how-it-works">How it works</a>
+      <a href="#sales-teams">Sales Teams</a>
       <a href="/pricing">Pricing</a>
-      <a href="/login">Login</a>
-      <a class="nav-cta" href="/signup">Sign up</a>
+      <a href="#blog">Blog</a>
     </nav>
+    <a class="mac-cta nav-button" href="/download">Get for Mac</a>
   </header>
 
   <main>
-    <section class="cinematic-hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Built for consent-based sales calls</p>
-        <h1>The AI teleprompter for live sales calls.</h1>
-        <p class="hero-subtitle">Loading... listens during phone and video calls, understands what the buyer is saying, and gives reps the next best line in real time.</p>
+    <section class="sky-hero">
+      <div class="sky-streaks" aria-hidden="true"></div>
+      <div class="sun-glow"></div>
+      <div class="horizon-glow" aria-hidden="true"></div>
+      <div class="mountain mountain-back"></div>
+      <div class="mountain mountain-mid"></div>
+      <div class="mountain mountain-front"></div>
+      <div class="mountain mountain-silhouette"></div>
+      <div class="hero-content">
+        <p class="pill-label">Real-time sales guidance</p>
+        <h1>Your AI sales copilot, live on every call.</h1>
+        <p class="hero-subtitle">Loading... listens during sales calls, detects objections in real time, and loads the perfect response before the rep has to think.</p>
         <div class="hero-actions">
-          <a class="button primary" href="/signup">Start free</a>
-          <a class="button ghost" href="/live-call">View live demo</a>
-          <a class="button ghost" href="/signup">Get for Mac</a>
+          <a class="mac-cta hero-button" href="/download">Get for Mac</a>
+          <a class="secondary-cta" href="/signup">Launch Web Demo</a>
         </div>
-        <p class="consent-note">Use only on calls where recording and transcription are disclosed and permitted by all applicable laws and company policies.</p>
       </div>
 
-      <div class="product-frame" aria-label="Loading live product mockup">
-        <div class="product-topline">
-          <span class="pulse"></span>
-          <span>Live call active</span>
-          <strong>Close probability 78%</strong>
+      <div class="hero-mockup float-soft" aria-label="Loading sales assistant product mockup">
+        <div class="signal-chip chip-left">Price objection detected</div>
+        <div class="signal-chip chip-right">Meeting intent rising</div>
+        <div class="assistant-bar">
+          <span class="assistant-orb"></span>
+          <button type="button">Live call</button>
+          <button type="button">Hide</button>
         </div>
-        <div class="mock-command-grid">
-          <div class="mock-score">
-            <span>Call health</span>
-            <strong>Strong</strong>
-            <span>Sentiment</span>
-            <strong>Positive</strong>
-            <span>Objection</span>
-            <strong>Proof needed</strong>
+        <div class="mac-window">
+          <div class="window-chrome">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="window-title">Loading... Sales Copilot</span>
           </div>
-          <div class="mock-prompter">
-            <span>Say next</span>
-            <p>"Let's use the follow-up session to prove this against your current workflow. Should we focus on rep ramp time or objection handling first?"</p>
+          <div class="mockup-grid">
+            <aside class="mini-card score-preview">
+              <span>Call score</span>
+              <strong>82</strong>
+              <small>Positive buyer intent</small>
+            </aside>
+            <section class="mini-card teleprompter-preview">
+              <span>Say this next</span>
+              <p>"Let's map the price concern to saved ramp time and see if the numbers make sense."</p>
+            </section>
+            <aside class="mini-card schedule-preview">
+              <span>Scheduling</span>
+              <strong>Follow-up detected</strong>
+              <small>Next week, 30 min</small>
+            </aside>
+          </div>
+          <div class="transcript-strip">
+            <span>Customer:</span>
+            <p>I like it, but I need to see whether it saves our reps enough time.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="product" class="section-band">
+    <section id="product" class="section-wrap">
       <div class="section-heading">
-        <p class="eyebrow">Product</p>
-        <h2>A command center for the moment that matters.</h2>
-        <p>Not a transcript analyzer after the fact. Loading... is built to support the rep while the conversation is still alive.</p>
+        <span class="pill-label">Live assistance</span>
+        <h2>How Loading... helps during a sales call</h2>
       </div>
-      <div class="feature-grid">
-        <article>
-          <h3>Real-time teleprompter</h3>
-          <p>Suggests what to say next based on customer objections, intent, urgency, and call context.</p>
+      <div class="split-feature-grid">
+        <article class="feature-card blue-feature">
+          <h3>Loading... listens to the conversation</h3>
+          <p>It follows the live call, picks up customer intent, and understands objections as they happen.</p>
+          <div class="recording-demo">
+            <div class="timer-demo">00:15</div>
+            <div class="recording-dot"><span></span>Recording</div>
+            <div class="waveform" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="command-bar">
+              <span>Assist</span>
+              <span>What should I say?</span>
+              <span>Recap</span>
+            </div>
+          </div>
         </article>
-        <article>
-          <h3>Buyer signal detection</h3>
-          <p>Surfaces buying signals, competitor mentions, pricing concerns, proof requests, and scheduling intent.</p>
-        </article>
-        <article>
-          <h3>Automatic notes</h3>
-          <p>Turns live conversation moments into notes, action items, follow-ups, and post-call summaries.</p>
+
+        <article class="feature-card assist-feature">
+          <h3>When the customer hesitates, Loading... assists instantly</h3>
+          <p>When a buyer mentions price, timing, competitors, or uncertainty, Loading... gives the rep a clear next response.</p>
+          <div class="assist-demo">
+            <div class="floating-controls">
+              <span class="assistant-orb dark"></span>
+              <button type="button">Hide</button>
+            </div>
+            <div class="dark-assist-card">
+              <button type="button">Assist</button>
+              <span>Viewed conversation</span>
+              <p>Customer mentioned price concern. Suggest ROI response.</p>
+              <div class="assist-input">Ask about the call, or press Cmd + Enter for Assist</div>
+            </div>
+          </div>
         </article>
       </div>
     </section>
 
-    <section id="how-it-works" class="how-grid">
-      <div>
-        <p class="eyebrow">How it works</p>
-        <h2>Listen. Understand. Prompt. Summarize.</h2>
+    <section class="notes-section">
+      <div class="section-heading centered">
+        <span class="pill-label">Instant notes</span>
+        <h2>Real-time sales notes</h2>
+        <p>Every objection, pain point, and next step captured automatically.</p>
       </div>
-      <ol class="steps">
-        <li><strong>1. Join a call</strong><span>The rep opens Loading... beside a phone or video call after consent is handled.</span></li>
-        <li><strong>2. Stream transcript</strong><span>Mock STT runs today; browser microphone, Twilio, and STT APIs plug in later.</span></li>
-        <li><strong>3. Coach live</strong><span>The assistant scores the call and updates the teleprompter every few seconds.</span></li>
-        <li><strong>4. Close the loop</strong><span>Scheduling intent, notes, summary, and next steps appear automatically.</span></li>
-      </ol>
+      <div class="notes-window">
+        <div class="window-chrome">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="window-title">Call Notes</span>
+        </div>
+        <div class="notes-body">
+          <p class="note-date">Today, 10:42 AM</p>
+          <h3>Demo Call with Acme Sales Team</h3>
+          <div class="note-tabs">
+            <span>Summary</span>
+            <span>Transcript</span>
+            <span>Action Items</span>
+          </div>
+          <ul>
+            <li>Customer struggles to train new reps</li>
+            <li>Price concern mentioned</li>
+            <li>Competitor being evaluated</li>
+            <li>Follow-up demo requested</li>
+            <li>Send calendar invite for next week</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="sales-teams" class="section-wrap">
+      <div class="section-heading centered">
+        <span class="pill-label">Built for reps</span>
+        <h2>Built to help reps close while the call is still happening</h2>
+      </div>
+      <div class="capability-grid">
+        <article class="capability-card">
+          <div class="icon-tile">TP</div>
+          <h3>Live Teleprompter</h3>
+          <p>Clear talk tracks update as buyer context changes.</p>
+          <div class="mini-preview-line wide"></div>
+          <div class="mini-preview-line"></div>
+        </article>
+        <article class="capability-card">
+          <div class="icon-tile">82</div>
+          <h3>Call Score</h3>
+          <p>Sentiment, objections, urgency, and close probability in one view.</p>
+          <div class="meter-preview"><span style="width: 78%"></span></div>
+        </article>
+        <article class="capability-card">
+          <div class="icon-tile">Cal</div>
+          <h3>Auto Scheduling</h3>
+          <p>Detects meeting intent and drafts the next booking step.</p>
+          <div class="calendar-preview">Next week<br><strong>30 min demo</strong></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="pricing-teaser">
+      <div class="section-heading centered">
+        <span class="pill-label">Pricing</span>
+        <h2>Start with the web demo. Upgrade when your team is ready.</h2>
+      </div>
+      <div class="pricing-grid compact-pricing">
+        <article class="price-card">
+          <span>Starter</span>
+          <strong>$0</strong>
+          <p>Try the live mock call experience.</p>
+        </article>
+        <article class="price-card featured">
+          <span>Pro</span>
+          <strong>$29</strong>
+          <p>For individual reps using live call guidance.</p>
+        </article>
+        <article class="price-card">
+          <span>Team</span>
+          <strong>$79</strong>
+          <p>For managers, shared notes, and team analytics.</p>
+        </article>
+      </div>
+      <div class="center-actions">
+        <a class="mac-cta" href="/download">Get for Mac</a>
+      </div>
+    </section>
+
+    <section id="blog" class="blog-teaser">
+      <span class="pill-label">Blog</span>
+      <h2>Sales calls are becoming real-time.</h2>
+      <p>Coming soon: teardown notes on objection handling, AI call coaching, and ethical live sales assistance.</p>
     </section>
   </main>
 </body>

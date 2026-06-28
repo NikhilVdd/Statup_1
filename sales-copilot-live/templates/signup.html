@@ -7,22 +7,25 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="auth-body">
-  <main class="auth-card">
-    <a class="brand" href="/">Loading...</a>
-    <h1>Create your workspace</h1>
-    <p>Sign up to enter the live AI sales command center.</p>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash">{{ messages[0] }}</div>
-      {% endif %}
-    {% endwith %}
-    <form method="post" class="auth-form">
-      <label>Name<input name="name" autocomplete="name" required></label>
-      <label>Email<input name="email" type="email" autocomplete="email" required></label>
-      <label>Password<input name="password" type="password" minlength="6" autocomplete="new-password" required></label>
-      <button class="button primary" type="submit">Enter app</button>
-    </form>
-    <p class="auth-switch">Already have an account? <a href="/login">Log in</a></p>
-  </main>
+  <div class="auth-sky">
+    <div class="sun-glow"></div>
+    <div class="auth-card glass-card">
+      <a class="brand-mark" href="/">Loading...</a>
+      <h1>Create your workspace</h1>
+      <p>Start the web demo and see the live sales teleprompter in action.</p>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">{{ messages[0] }}</div>
+        {% endif %}
+      {% endwith %}
+      <form method="post" class="auth-form">
+        <label>Name<input name="name" autocomplete="name" required></label>
+        <label>Email<input name="email" type="email" autocomplete="email" required></label>
+        <label>Password<input name="password" type="password" minlength="6" autocomplete="new-password" required></label>
+        <button class="mac-cta full" type="submit">Enter app</button>
+      </form>
+      <p class="auth-switch">Already have an account? <a href="/login">Log in</a></p>
+    </div>
+  </div>
 </body>
 </html>

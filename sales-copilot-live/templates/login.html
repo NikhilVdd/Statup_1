@@ -7,21 +7,24 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="auth-body">
-  <main class="auth-card">
-    <a class="brand" href="/">Loading...</a>
-    <h1>Welcome back</h1>
-    <p>Open the live sales assistant.</p>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash">{{ messages[0] }}</div>
-      {% endif %}
-    {% endwith %}
-    <form method="post" class="auth-form">
-      <label>Email<input name="email" type="email" autocomplete="email" required></label>
-      <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
-      <button class="button primary" type="submit">Log in</button>
-    </form>
-    <p class="auth-switch">New to Loading...? <a href="/signup">Create an account</a></p>
-  </main>
+  <div class="auth-sky">
+    <div class="sun-glow"></div>
+    <div class="auth-card glass-card">
+      <a class="brand-mark" href="/">Loading...</a>
+      <h1>Welcome back</h1>
+      <p>Open your live AI sales copilot.</p>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">{{ messages[0] }}</div>
+        {% endif %}
+      {% endwith %}
+      <form method="post" class="auth-form">
+        <label>Email<input name="email" type="email" autocomplete="email" required></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+        <button class="mac-cta full" type="submit">Log in</button>
+      </form>
+      <p class="auth-switch">New to Loading...? <a href="/signup">Create an account</a></p>
+    </div>
+  </div>
 </body>
 </html>

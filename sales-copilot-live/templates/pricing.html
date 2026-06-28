@@ -5,39 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pricing | Loading...</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 </head>
-<body>
-  <header class="site-header marketing-header">
-    <a class="brand" href="/">Loading...</a>
-    <nav>
-      <a href="/">Home</a>
+<body class="soft-page">
+  <header class="site-nav">
+    <a class="brand-mark" href="/">Loading...</a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="/">Product</a>
+      <a href="/pricing">Pricing</a>
       <a href="/login">Login</a>
-      <a class="nav-cta" href="/signup">Sign up</a>
     </nav>
+    <a class="mac-cta nav-button" href="/download">Get for Mac</a>
   </header>
+
   <main class="pricing-page">
-    <section class="section-heading">
-      <p class="eyebrow">Pricing</p>
-      <h1>Start with the live demo. Scale when your team is ready.</h1>
+    <section class="pricing-hero">
+      <span class="pill-label">Simple plans</span>
+      <h1>Bring live AI coaching to every sales call.</h1>
+      <p>Start free with the web demo, then move into Mac overlay workflows as the product matures.</p>
     </section>
+
     <section class="pricing-grid">
       <article class="price-card">
         <span>Starter</span>
         <strong>$0</strong>
-        <p>For testing the real-time teleprompter flow with mock calls.</p>
-        <a class="button primary" href="/signup">Start free</a>
+        <p>For founders testing the live call command center.</p>
+        <ul>
+          <li>Mock live call demo</li>
+          <li>Live teleprompter</li>
+          <li>Post-call summary</li>
+        </ul>
+        <a class="secondary-cta full" href="/signup">Launch Web Demo</a>
       </article>
       <article class="price-card featured">
-        <span>Team</span>
-        <strong>$49</strong>
-        <p>Per rep per month for live call coaching, summaries, and team analytics.</p>
-        <a class="button primary" href="/signup">Join waitlist</a>
+        <span>Pro</span>
+        <strong>$29</strong>
+        <p>For individual reps who want real-time guidance during calls.</p>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Scheduling assistant</li>
+          <li>Saved call history soon</li>
+        </ul>
+        <a class="mac-cta full" href="/download">Get for Mac</a>
       </article>
       <article class="price-card">
-        <span>Enterprise</span>
-        <strong>Custom</strong>
-        <p>For call centers that need CRM, telephony, compliance, and admin controls.</p>
-        <a class="button ghost-dark" href="/signup">Talk to us</a>
+        <span>Team</span>
+        <strong>$79</strong>
+        <p>For sales teams that need coaching signals and shared notes.</p>
+        <ul>
+          <li>Team analytics soon</li>
+          <li>CRM integrations planned</li>
+          <li>Manager review flows</li>
+        </ul>
+        <a class="secondary-cta full" href="/signup">Join waitlist</a>
       </article>
     </section>
   </main>
