@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Company | Loading...</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="workspace-body">
+  <header class="workspace-topbar"><a class="brand-mark" href="/">Loading...</a><nav class="workspace-tabs"><a href="/dashboard">Dashboard</a><a class="active" href="/companies">Companies</a><a href="/meetings">Meetings</a><a href="/notes">Notes</a></nav></header>
+  <main class="workspace-shell narrow">
+    <section class="workspace-page-title"><span class="pill-label">New client</span><h1>Add New Company</h1><p>Create the account context Loading... will use during live calls.</p></section>
+    {% with messages = get_flashed_messages() %}{% if messages %}<div class="flash">{{ messages[0] }}</div>{% endif %}{% endwith %}
+    <form class="app-panel form-grid" method="post">
+      <label>Company / Client Name<input name="company_name" required></label>
+      <label>Project Name<input name="project_name"></label>
+      <label>Contact Name<input name="contact_name"></label>
+      <label>Contact Email<input name="contact_email" type="email"></label>
+      <label>Contact Phone<input name="contact_phone"></label>
+      <label>Website<input name="website"></label>
+      <label>Deal Stage<select name="deal_stage"><option>New Lead</option><option>Discovery</option><option>Demo Scheduled</option><option>Proposal Sent</option><option>Negotiation</option><option>Closed Won</option><option>Closed Lost</option></select></label>
+      <label>Priority<select name="priority"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+      <label>Status<select name="status"><option selected>Active</option><option>Follow-up Needed</option><option>Meeting Scheduled</option><option>Closed</option><option>Paused</option></select></label>
+      <label>Product or service being sold<input name="product_or_service"></label>
+      <label class="span-2">Pain points if known<textarea name="pain_points"></textarea></label>
+      <label class="span-2">Notes / Context<textarea name="notes"></textarea></label>
+      <button class="mac-cta span-2" type="submit">Create Company</button>
+    </form>
+  </main>
+</body>
+</html>

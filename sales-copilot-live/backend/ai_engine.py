@@ -1,6 +1,7 @@
 def generate_live_sales_suggestion(call_state):
     recent_text = call_state.recent_transcript_text()
     latest_customer = call_state.latest_customer_message.lower()
+    company = call_state.company_context or {}
 
     suggestion = {
         "suggested_response": "Ask one focused discovery question, then connect the answer to a clear business outcome.",
@@ -164,4 +165,28 @@ def generate_live_sales_suggestion(call_state):
             }
         )
 
+    return apply_company_context(suggestion, company)
+
+
+def apply_company_context(suggestion, company):
+    if not company:
+        return suggestion
+
+    company_name = company.get("company_name") or "this account"
+    project_name = company.get("project_name") or "this sales motion"
+    pain_points = company.get("pain_points") or ""
+    product_or_service = company.get("product_or_service") or "your solution"
+
+    if pain_points:
+        context_line = (
+            f"Since {company_name} is focused on {project_name} and has pain around {pain_points}, "
+            f"tie this back to how {product_or_service} helps that specific workflow."
+        )
+    else:
+        context_line = (
+            f"Since this is for {company_name}, connect your response to {project_name} and the business outcome they care about."
+        )
+
+    suggestion["suggested_response"] = f"{context_line} {suggestion['suggested_response']}"
+    suggestion["key_moment"] = f"{company_name}: {suggestion.get('key_moment', 'Live sales moment captured.')}"
     return suggestion

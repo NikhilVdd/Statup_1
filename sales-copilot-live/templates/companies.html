@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Companies | Loading...</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body class="workspace-body">
+  <header class="workspace-topbar">
+    <a class="brand-mark" href="/">Loading...</a>
+    <nav class="workspace-tabs">
+      <a href="/dashboard">Dashboard</a><a class="active" href="/companies">Companies</a><a href="/meetings">Meetings</a><a href="/notes">Notes</a><a href="/download">Settings</a>
+    </nav>
+    <a class="mac-cta small" href="/companies/new">Add New Company</a>
+  </header>
+  <main class="workspace-shell">
+    <section class="workspace-page-title">
+      <span class="pill-label">Client database</span>
+      <h1>Companies</h1>
+      <p>A Monday-style pipeline table for clients, meetings, call scores, and next actions.</p>
+    </section>
+    <section class="app-panel">
+      <div class="table-toolbar">
+        <input id="companySearch" class="search-input" placeholder="Search companies, projects, contacts...">
+        <select id="statusFilter" class="search-input">
+          <option value="">All statuses</option>
+          <option>Active</option>
+          <option>Follow-up Needed</option>
+          <option>Meeting Scheduled</option>
+          <option>Closed</option>
+          <option>Paused</option>
+        </select>
+      </div>
+      <div class="crm-table" id="companiesTable">
+        <div class="crm-row crm-head">
+          <span>Company / Client Name</span><span>Project</span><span>Contact</span><span>Email</span><span>Deal Stage</span><span>Priority</span><span>Last Call</span><span>Next Meeting</span><span>Score</span><span>Status</span><span>Actions</span>
+        </div>
+        {% for company in companies %}
+          <div class="crm-row company-data-row" data-status="{{ company.status }}" data-search="{{ company.company_name }} {{ company.project_name }} {{ company.contact_name }} {{ company.contact_email }}">
+            <span><strong>{{ company.company_name }}</strong></span>
+            <span>{{ company.project_name or "-" }}</span>
+            <span>{{ company.contact_name or "-" }}</span>
+            <span>{{ company.contact_email or "-" }}</span>
+            <span class="status-pill-soft">{{ company.deal_stage }}</span>
+            <span class="priority-{{ company.priority|lower }}">{{ company.priority }}</span>
+            <span>{{ company.last_call_date[:10] if company.last_call_date else "-" }}</span>
+            <span>{{ company.next_meeting or "-" }}</span>
+            <span>{{ company.call_score or "-" }}</span>
+            <span class="status-pill-soft">{{ company.status }}</span>
+            <span class="row-actions">
+              <a href="/companies/{{ company.id }}">Open</a>
+              <a href="/app/live-call/{{ company.id }}">Start Call</a>
+              <a href="/meetings/new/{{ company.id }}">Add Note</a>
+              <a href="/companies/{{ company.id }}/edit">Edit</a>
+            </span>
+          </div>
+        {% else %}
+          <div class="empty-state"><h2>No companies yet.</h2><p>Add your first client to start using Loading...</p><a class="mac-cta" href="/companies/new">Add New Company</a></div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+</body>
+</html>

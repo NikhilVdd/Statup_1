@@ -5,41 +5,125 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard | Loading...</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 </head>
-<body class="soft-page">
-  <header class="site-nav">
+<body class="workspace-body">
+  <header class="workspace-topbar">
     <a class="brand-mark" href="/">Loading...</a>
-    <nav class="nav-links" aria-label="Primary navigation">
-      <a href="/live-call">Live App</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/logout">Logout</a>
+    <nav class="workspace-tabs">
+      <a class="active" href="/dashboard">Dashboard</a>
+      <a href="/companies">Companies</a>
+      <a href="/meetings">Meetings</a>
+      <a href="/notes">Notes</a>
+      <a href="/download">Settings</a>
     </nav>
-    <a class="mac-cta nav-button" href="/download">Get for Mac</a>
+    <a class="secondary-cta small" href="/logout">Logout</a>
   </header>
 
-  <main class="dashboard-page">
-    <section class="pricing-hero compact">
-      <span class="pill-label">Workspace</span>
-      <h1>Welcome{% if user %}, {{ user["name"] }}{% endif %}</h1>
-      <p>Your live sales copilot workspace is ready.</p>
-      <a class="mac-cta" href="/live-call">Open Live Assistant</a>
+  <main class="workspace-shell">
+    <section class="workspace-hero-card">
+      <div>
+        <span class="pill-label">Client workspace</span>
+        <h1>Welcome back{% if user %}, {{ user["name"] }}{% endif %}</h1>
+        <p>Manage client context before every call, then launch the live AI teleprompter with the right account history already loaded.</p>
+      </div>
+      <div class="workspace-actions">
+        <a class="mac-cta" href="/companies/new">Add New Company</a>
+        {% if companies %}
+          <a class="secondary-cta" href="/app/live-call/{{ companies[0].id }}">Start Live Call</a>
+        {% else %}
+          <a class="secondary-cta" href="/live-call">Start Live Call</a>
+        {% endif %}
+      </div>
     </section>
-    <section class="capability-grid">
-      <article class="capability-card">
-        <div class="icon-tile">18</div>
-        <h3>Total live calls</h3>
-        <p>Demo metric for the MVP workspace.</p>
+
+    <section class="stat-grid">
+      <article class="stat-tile"><span>Total Companies</span><strong>{{ stats.total_companies }}</strong></article>
+      <article class="stat-tile"><span>Upcoming Meetings</span><strong>{{ stats.upcoming_meetings }}</strong></article>
+      <article class="stat-tile"><span>Calls Completed</span><strong>{{ stats.calls_completed }}</strong></article>
+      <article class="stat-tile"><span>Average Call Score</span><strong>{{ stats.average_call_score }}%</strong></article>
+      <article class="stat-tile"><span>Follow-ups Due</span><strong>{{ stats.followups_due }}</strong></article>
+    </section>
+
+    {% if not companies %}
+      <section class="empty-state app-panel">
+        <h2>No companies yet.</h2>
+        <p>Add your first client to start using Loading... with account context, meetings, notes, and live call coaching.</p>
+        <a class="mac-cta" href="/companies/new">Add your first client</a>
+      </section>
+    {% endif %}
+
+    <section class="workspace-grid two-col">
+      <article class="app-panel">
+        <div class="panel-header clean">
+          <div><span class="panel-kicker">Next calls</span><h2>Upcoming meeting notifications</h2></div>
+          <a class="secondary-cta small" href="/meetings">View all</a>
+        </div>
+        <div class="stack-list">
+          {% for meeting in upcoming_meetings %}
+            <div class="meeting-card">
+              <div>
+                <strong>{{ meeting.company_name }}</strong>
+                <span>{{ meeting.project_name or "General sales motion" }}</span>
+                <p>{{ meeting.title }} - {{ meeting.meeting_date }} at {{ meeting.meeting_time }}</p>
+              </div>
+              <span class="status-pill-soft status-upcoming">{{ meeting.status }}</span>
+              <div class="row-actions">
+                <a href="/companies/{{ meeting.company_id }}">Open Client</a>
+                <a href="/app/live-call/{{ meeting.company_id }}?meeting_id={{ meeting.id }}">Start Call</a>
+              </div>
+            </div>
+          {% else %}
+            <div class="soft-empty">No upcoming meetings yet. Add a company, then schedule the next call.</div>
+          {% endfor %}
+        </div>
       </article>
-      <article class="capability-card">
-        <div class="icon-tile">61%</div>
-        <h3>Avg close probability</h3>
-        <p>Live scoring foundation for future analytics.</p>
+
+      <article class="app-panel">
+        <div class="panel-header clean">
+          <div><span class="panel-kicker">AI memory</span><h2>Recent AI meeting notes</h2></div>
+          <a class="secondary-cta small" href="/notes">View notes</a>
+        </div>
+        <div class="stack-list">
+          {% for note in recent_notes %}
+            <div class="note-card">
+              <div>
+                <strong>{{ note.company_name }}</strong>
+                <span>{{ note.project_name or "Client call" }} - {{ note.call_date[:10] }}</span>
+                <p>{{ note.summary }}</p>
+                <small>Main objection: {{ note.objections or "None" }} | Next step: {{ note.follow_up_tasks or "Follow up" }}</small>
+              </div>
+              <a class="secondary-cta small" href="/notes/{{ note.id }}">View Notes</a>
+            </div>
+          {% else %}
+            <div class="soft-empty">AI notes will appear here after you stop a client live call.</div>
+          {% endfor %}
+        </div>
       </article>
-      <article class="capability-card">
-        <div class="icon-tile">$</div>
-        <h3>Top objection</h3>
-        <p>Price concerns appeared most often.</p>
-      </article>
+    </section>
+
+    <section class="app-panel">
+      <div class="panel-header clean">
+        <div><span class="panel-kicker">Pipeline</span><h2>Client pipeline preview</h2></div>
+        <a class="secondary-cta small" href="/companies">Open database</a>
+      </div>
+      <div class="crm-table compact">
+        <div class="crm-row crm-head">
+          <span>Company</span><span>Project</span><span>Stage</span><span>Priority</span><span>Status</span><span>Call</span>
+        </div>
+        {% for company in companies[:6] %}
+          <div class="crm-row">
+            <span><strong>{{ company.company_name }}</strong><small>{{ company.contact_name or "No contact yet" }}</small></span>
+            <span>{{ company.project_name or "-" }}</span>
+            <span class="status-pill-soft">{{ company.deal_stage }}</span>
+            <span class="priority-{{ company.priority|lower }}">{{ company.priority }}</span>
+            <span>{{ company.status }}</span>
+            <span><a href="/app/live-call/{{ company.id }}">Start</a></span>
+          </div>
+        {% else %}
+          <div class="soft-empty">No pipeline records yet.</div>
+        {% endfor %}
+      </div>
     </section>
   </main>
 </body>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Meetings | Loading...</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
+<body class="workspace-body">
+  <header class="workspace-topbar"><a class="brand-mark" href="/">Loading...</a><nav class="workspace-tabs"><a href="/dashboard">Dashboard</a><a href="/companies">Companies</a><a class="active" href="/meetings">Meetings</a><a href="/notes">Notes</a></nav></header>
+  <main class="workspace-shell">
+    <section class="workspace-page-title"><span class="pill-label">Calendar</span><h1>Meetings</h1><p>Upcoming and completed client conversations.</p></section>
+    <section class="app-panel stack-list">
+      {% for meeting in meetings %}
+        <div class="meeting-card">
+          <div><strong>{{ meeting.title }}</strong><span>{{ meeting.company_name }} - {{ meeting.project_name or "General" }}</span><p>{{ meeting.meeting_date }} at {{ meeting.meeting_time }} for {{ meeting.duration_minutes }} minutes</p></div>
+          <span class="status-pill-soft">{{ meeting.status }}</span>
+          <div class="row-actions"><a href="/meetings/{{ meeting.id }}">Open</a><a href="/app/live-call/{{ meeting.company_id }}?meeting_id={{ meeting.id }}">Start Call</a></div>
+        </div>
+      {% else %}
+        <div class="empty-state"><h2>No meetings yet.</h2><p>Add a company first, then schedule your next call.</p><a class="mac-cta" href="/companies">Open Companies</a></div>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>

@@ -56,7 +56,13 @@
           <div class="mockup-grid">
             <aside class="mini-card score-preview">
               <span>Call score</span>
-              <strong>82</strong>
+              <div class="dynamic-score-ring" data-score-ring data-score="82">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="score-track" cx="60" cy="60" r="48"></circle>
+                  <circle class="score-progress" cx="60" cy="60" r="48"></circle>
+                </svg>
+                <strong data-score-value>82</strong>
+              </div>
               <small>Positive buyer intent</small>
             </aside>
             <section class="mini-card teleprompter-preview">
@@ -65,8 +71,19 @@
             </section>
             <aside class="mini-card schedule-preview">
               <span>Scheduling</span>
-              <strong>Follow-up detected</strong>
-              <small>Next week, 30 min</small>
+              <div class="schedule-preview-row">
+                <div class="dynamic-calendar" aria-hidden="true">
+                  <div class="calendar-top"></div>
+                  <div class="calendar-grid">
+                    <i></i><i></i><i></i><i></i><i></i><i></i>
+                  </div>
+                  <span class="calendar-pulse"></span>
+                </div>
+                <div>
+                  <strong>Follow-up detected</strong>
+                  <small>Next week, 30 min</small>
+                </div>
+              </div>
             </aside>
           </div>
           <div class="transcript-strip">
@@ -87,7 +104,7 @@
           <h3>Loading... listens to the conversation</h3>
           <p>It follows the live call, picks up customer intent, and understands objections as they happen.</p>
           <div class="recording-demo">
-            <div class="timer-demo">00:15</div>
+            <div class="timer-demo" data-demo-timer data-start-seconds="15">00:15</div>
             <div class="recording-dot"><span></span>Recording</div>
             <div class="waveform" aria-hidden="true">
               <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -165,13 +182,29 @@
           <div class="mini-preview-line"></div>
         </article>
         <article class="capability-card">
-          <div class="icon-tile">82</div>
+          <div class="icon-tile score-icon">
+            <div class="dynamic-score-ring compact" data-score-ring data-score="82">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="score-track" cx="60" cy="60" r="48"></circle>
+                <circle class="score-progress" cx="60" cy="60" r="48"></circle>
+              </svg>
+              <strong data-score-value>82</strong>
+            </div>
+          </div>
           <h3>Call Score</h3>
           <p>Sentiment, objections, urgency, and close probability in one view.</p>
           <div class="meter-preview"><span style="width: 78%"></span></div>
         </article>
         <article class="capability-card">
-          <div class="icon-tile">Cal</div>
+          <div class="icon-tile calendar-icon">
+            <div class="dynamic-calendar mini" aria-hidden="true">
+              <div class="calendar-top"></div>
+              <div class="calendar-grid">
+                <i></i><i></i><i></i><i></i>
+              </div>
+              <span class="calendar-pulse"></span>
+            </div>
+          </div>
           <h3>Auto Scheduling</h3>
           <p>Detects meeting intent and drafts the next booking step.</p>
           <div class="calendar-preview">Next week<br><strong>30 min demo</strong></div>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Notes | Loading...</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
+<body class="workspace-body">
+  <header class="workspace-topbar"><a class="brand-mark" href="/">Loading...</a><nav class="workspace-tabs"><a href="/dashboard">Dashboard</a><a href="/companies">Companies</a><a href="/meetings">Meetings</a><a class="active" href="/notes">Notes</a></nav></header>
+  <main class="workspace-shell">
+    <section class="workspace-page-title"><span class="pill-label">AI notes</span><h1>Meeting Notes</h1><p>Saved summaries, objections, buying signals, and follow-up tasks.</p></section>
+    <section class="app-panel stack-list">
+      {% for note in notes %}
+        <div class="note-card"><div><strong>{{ note.company_name }}</strong><span>{{ note.project_name or "Client call" }} - {{ note.call_date[:10] }}</span><p>{{ note.summary }}</p><small>Score {{ note.call_score or 0 }}% | {{ note.sentiment or "Neutral" }}</small></div><a class="secondary-cta small" href="/notes/{{ note.id }}">View Notes</a></div>
+      {% else %}
+        <div class="empty-state"><h2>No AI notes yet.</h2><p>Start and stop a live client call to save the first note.</p><a class="mac-cta" href="/companies">Open Companies</a></div>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>

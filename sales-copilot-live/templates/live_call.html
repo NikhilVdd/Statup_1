@@ -6,7 +6,7 @@
   <title>Loading... Live Sales Copilot</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body class="app-body">
+<body class="app-body" data-company-id="{{ company.id if company else '' }}" data-meeting-id="{{ meeting.id if meeting else '' }}">
   <header class="app-topbar">
     <a class="brand-mark" href="/">Loading...</a>
     <div class="call-meta">
@@ -24,6 +24,20 @@
   <section class="consent-banner">
     Consent reminder: use Loading... only when recording, transcription, and AI assistance have been disclosed and permitted.
   </section>
+
+  {% if company %}
+    <section class="client-context-bar app-panel">
+      <div>
+        <span class="panel-kicker">Client context loaded</span>
+        <h1>{{ company.company_name }}</h1>
+        <p>{{ company.project_name or "General sales motion" }} | {{ company.contact_name or "No contact" }} | {{ company.deal_stage }}</p>
+      </div>
+      <div class="context-grid">
+        <div><span>Known pain points</span><strong>{{ company.pain_points or "Not captured yet" }}</strong></div>
+        <div><span>Product/service</span><strong>{{ company.product_or_service or "Not captured yet" }}</strong></div>
+      </div>
+    </section>
+  {% endif %}
 
   <main class="sales-app-grid">
     <aside class="app-panel score-panel">
@@ -94,8 +108,12 @@
           <div>
             <h3>Pain points</h3>
             <ul class="note-list">
-              <li>Follow-ups feel slow</li>
-              <li>Training new reps is hard</li>
+              {% if company and company.pain_points %}
+                <li>{{ company.pain_points }}</li>
+              {% else %}
+                <li>Follow-ups feel slow</li>
+                <li>Training new reps is hard</li>
+              {% endif %}
             </ul>
           </div>
           <div>
@@ -122,6 +140,7 @@
       <span class="panel-kicker">After call</span>
       <h2>Post-call summary</h2>
       <div id="summaryArea" class="summary-box">Stop the call to generate a mock summary.</div>
+      <div id="saveStatus" class="save-status"></div>
     </article>
   </section>
 

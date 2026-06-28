@@ -18,11 +18,19 @@ class CallState:
         self.call_health = "Stable"
         self.scheduling_intent = False
         self.key_moments = []
+        self.company_id = None
+        self.meeting_id = None
+        self.company_context = {}
 
     def start(self):
         self.is_active = True
         self.started_at = datetime.now(timezone.utc).isoformat()
         self.ended_at = None
+
+    def set_context(self, company=None, meeting_id=None):
+        self.company_context = company or {}
+        self.company_id = self.company_context.get("id")
+        self.meeting_id = meeting_id
 
     def stop(self):
         self.is_active = False
@@ -76,4 +84,7 @@ class CallState:
             "call_health": self.call_health,
             "scheduling_intent": self.scheduling_intent,
             "key_moments": self.key_moments,
+            "company_id": self.company_id,
+            "meeting_id": self.meeting_id,
+            "company_context": self.company_context,
         }

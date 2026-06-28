@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>{{ meeting.title }} | Loading...</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
+<body class="workspace-body">
+  <header class="workspace-topbar"><a class="brand-mark" href="/">Loading...</a><nav class="workspace-tabs"><a href="/dashboard">Dashboard</a><a href="/companies">Companies</a><a class="active" href="/meetings">Meetings</a><a href="/notes">Notes</a></nav><a class="mac-cta small" href="/app/live-call/{{ meeting.company_id }}?meeting_id={{ meeting.id }}">Start Call</a></header>
+  <main class="workspace-shell">
+    <section class="client-hero app-panel"><div><span class="pill-label">{{ meeting.status }}</span><h1>{{ meeting.title }}</h1><p>{{ meeting.company_name }} - {{ meeting.project_name or "General" }}</p><div class="pill-row"><span>{{ meeting.meeting_date }}</span><span>{{ meeting.meeting_time }}</span><span>{{ meeting.meeting_type }}</span></div></div></section>
+    <section class="app-panel"><h2>Meeting notes</h2><p>{{ meeting.notes or "No manual notes yet." }}</p></section>
+    <section class="app-panel stack-list"><h2>Related AI call notes</h2>{% for note in notes %}<div class="note-card"><div><strong>{{ note.call_date[:10] }}</strong><p>{{ note.summary }}</p></div><a class="secondary-cta small" href="/notes/{{ note.id }}">Open</a></div>{% else %}<div class="soft-empty">No saved call notes yet.</div>{% endfor %}</section>
+  </main>
+</body>
+</html>

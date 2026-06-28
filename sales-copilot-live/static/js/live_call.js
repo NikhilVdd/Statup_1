@@ -19,6 +19,8 @@ let transcriptInterval = null;
 let timerInterval = null;
 let elapsedSeconds = 0;
 let mediaStream = null;
+const companyId = document.body.dataset.companyId;
+const meetingId = document.body.dataset.meetingId;
 
 const callStatus = document.getElementById("callStatus");
 const timer = document.getElementById("timer");
@@ -41,6 +43,7 @@ const nextAction = document.getElementById("nextAction");
 const urgencyLevel = document.getElementById("urgencyLevel");
 const confidenceScore = document.getElementById("confidenceScore");
 const summaryArea = document.getElementById("summaryArea");
+const saveStatus = document.getElementById("saveStatus");
 const keyMoments = document.getElementById("keyMoments");
 const schedulingPanel = document.getElementById("schedulingPanel");
 const scheduleStatus = document.getElementById("scheduleStatus");
@@ -187,6 +190,9 @@ startCall.addEventListener("click", () => {
   transcriptFeed.innerHTML = "";
   keyMoments.innerHTML = "";
   summaryArea.textContent = "Live call in progress.";
+  if (saveStatus) {
+    saveStatus.textContent = "";
+  }
   schedulingPanel.classList.add("inactive-panel");
   schedulingPanel.classList.remove("active-panel");
   scheduleStatus.textContent = "Idle";
@@ -196,7 +202,7 @@ startCall.addEventListener("click", () => {
   meetingAgenda.textContent = "When intent appears, Loading... will draft the booking context.";
   transcriptIndex = 0;
   requestMicrophone();
-  socket.emit("start_call");
+  socket.emit("start_call", { company_id: companyId, meeting_id: meetingId });
 });
 
 stopCall.addEventListener("click", () => {
@@ -240,6 +246,13 @@ socket.on("call_stopped", (data) => {
   stopMockTranscript();
   stopMicrophone();
   renderSummary(data.summary);
+  if (saveStatus) {
+    if (data.note_saved) {
+      saveStatus.innerHTML = `Call notes saved to this client. <a href="/notes/${data.note_id}">View saved notes</a>`;
+    } else {
+      saveStatus.textContent = "Demo call summary generated. Add a client to save notes automatically.";
+    }
+  }
 });
 
 socket.on("ai_suggestion", updateSuggestion);

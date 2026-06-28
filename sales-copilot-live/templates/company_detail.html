@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ company.company_name }} | Loading...</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="workspace-body">
+  <header class="workspace-topbar">
+    <a class="brand-mark" href="/">Loading...</a>
+    <nav class="workspace-tabs"><a href="/dashboard">Dashboard</a><a class="active" href="/companies">Companies</a><a href="/meetings">Meetings</a><a href="/notes">Notes</a></nav>
+    <a class="secondary-cta small" href="/companies">Back</a>
+  </header>
+  <main class="workspace-shell">
+    {% with messages = get_flashed_messages() %}{% if messages %}<div class="flash">{{ messages[0] }}</div>{% endif %}{% endwith %}
+    <section class="client-hero app-panel">
+      <div>
+        <span class="pill-label">{{ company.deal_stage }}</span>
+        <h1>{{ company.company_name }}</h1>
+        <p>{{ company.project_name or "No project name yet" }}</p>
+        <div class="pill-row"><span class="status-pill-soft">{{ company.priority }} priority</span><span class="status-pill-soft">{{ company.status }}</span><span>{{ company.contact_name or "No contact" }}</span><span>{{ company.contact_email or "" }}</span></div>
+      </div>
+      <div class="workspace-actions">
+        <a class="mac-cta" href="/app/live-call/{{ company.id }}">Start Live Call</a>
+        <a class="secondary-cta" href="/meetings/new/{{ company.id }}">Add Meeting</a>
+        <a class="secondary-cta" href="/companies/{{ company.id }}/edit">Edit</a>
+      </div>
+    </section>
+
+    <section class="workspace-grid two-col">
+      <article class="app-panel">
+        <div class="panel-header clean"><div><span class="panel-kicker">Client overview</span><h2>Account context</h2></div></div>
+        <dl class="detail-list">
+          <div><dt>Company</dt><dd>{{ company.company_name }}</dd></div>
+          <div><dt>Project</dt><dd>{{ company.project_name or "-" }}</dd></div>
+          <div><dt>Contact</dt><dd>{{ company.contact_name or "-" }}<br>{{ company.contact_email or "" }} {{ company.contact_phone or "" }}</dd></div>
+          <div><dt>Website</dt><dd>{{ company.website or "-" }}</dd></div>
+          <div><dt>Product/service</dt><dd>{{ company.product_or_service or "-" }}</dd></div>
+          <div><dt>Pain points</dt><dd>{{ company.pain_points or "-" }}</dd></div>
+          <div><dt>Notes/context</dt><dd>{{ company.notes or "-" }}</dd></div>
+        </dl>
+      </article>
+
+      <article class="app-panel">
+        <div class="panel-header clean"><div><span class="panel-kicker">Meetings</span><h2>Scheduled calls</h2></div><a class="secondary-cta small" href="/meetings/new/{{ company.id }}">Add Meeting</a></div>
+        <div class="stack-list">
+          {% for meeting in meetings %}
+            <div class="meeting-card">
+              <div><strong>{{ meeting.title }}</strong><span>{{ meeting.meeting_date }} at {{ meeting.meeting_time }} - {{ meeting.meeting_type }}</span><p>Score: {{ meeting.call_score or "-" }}</p></div>
+              <span class="status-pill-soft">{{ meeting.status }}</span>
+              <div class="row-actions"><a href="/meetings/{{ meeting.id }}">View Notes</a><a href="/app/live-call/{{ company.id }}?meeting_id={{ meeting.id }}">Start Call</a></div>
+            </div>
+          {% else %}
+            <div class="soft-empty">No meetings yet.</div>
+          {% endfor %}
+        </div>
+      </article>
+    </section>
+
+    <section class="workspace-grid two-col">
+      <article class="app-panel">
+        <div class="panel-header clean"><div><span class="panel-kicker">AI meeting notes</span><h2>Saved call intelligence</h2></div></div>
+        <div class="stack-list">
+          {% for note in notes %}
+            <div class="note-card">
+              <div><strong>{{ note.call_date[:10] }}</strong><p>{{ note.summary }}</p><small>Objections: {{ note.objections or "None" }} | Buying signals: {{ note.buying_signals or "None" }}</small></div>
+              <a class="secondary-cta small" href="/notes/{{ note.id }}">View Notes</a>
+            </div>
+          {% else %}
+            <div class="soft-empty">Stop a live call to save AI notes here.</div>
+          {% endfor %}
+        </div>
+      </article>
+      <article class="app-panel">
+        <div class="panel-header clean"><div><span class="panel-kicker">Timeline</span><h2>Activity</h2></div></div>
+        <div class="timeline-list">
+          {% for item in activity %}
+            <div><span></span><strong>{{ item.activity_type.replace("_", " ").title() }}</strong><p>{{ item.description }}<br><small>{{ item.created_at[:19] }}</small></p></div>
+          {% else %}
+            <div class="soft-empty">Activity appears here as this client moves through the pipeline.</div>
+          {% endfor %}
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

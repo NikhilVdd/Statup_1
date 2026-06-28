@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Add Meeting | Loading...</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
+<body class="workspace-body">
+  <header class="workspace-topbar"><a class="brand-mark" href="/">Loading...</a><nav class="workspace-tabs"><a href="/dashboard">Dashboard</a><a href="/companies">Companies</a><a class="active" href="/meetings">Meetings</a><a href="/notes">Notes</a></nav></header>
+  <main class="workspace-shell narrow">
+    <section class="workspace-page-title"><span class="pill-label">{{ company.company_name }}</span><h1>Add Meeting</h1><p>Schedule the next sales conversation.</p></section>
+    {% with messages = get_flashed_messages() %}{% if messages %}<div class="flash">{{ messages[0] }}</div>{% endif %}{% endwith %}
+    <form class="app-panel form-grid" method="post">
+      <label class="span-2">Meeting title<input name="title" required></label>
+      <label>Date<input name="meeting_date" type="date" required></label>
+      <label>Time<input name="meeting_time" type="time" required></label>
+      <label>Duration<input name="duration_minutes" type="number" value="30" min="15"></label>
+      <label>Meeting type<select name="meeting_type"><option>Discovery</option><option>Demo</option><option>Follow-up</option><option>Closing Call</option></select></label>
+      <label>Status<select name="status"><option>Upcoming</option><option>Completed</option><option>Canceled</option></select></label>
+      <label class="span-2">Notes<textarea name="notes"></textarea></label>
+      <button class="mac-cta span-2" type="submit">Create Meeting</button>
+    </form>
+  </main>
+</body>
+</html>

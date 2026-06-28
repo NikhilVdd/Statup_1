@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Call Notes | Loading...</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
+<body class="workspace-body">
+  <header class="workspace-topbar"><a class="brand-mark" href="/">Loading...</a><nav class="workspace-tabs"><a href="/dashboard">Dashboard</a><a href="/companies">Companies</a><a href="/meetings">Meetings</a><a class="active" href="/notes">Notes</a></nav><button class="secondary-cta small" data-copy-notes type="button">Copy notes</button></header>
+  <main class="workspace-shell note-detail" id="noteDetail">
+    <section class="client-hero app-panel"><div><span class="pill-label">{{ note.sentiment or "Neutral" }}</span><h1>{{ note.company_name }}</h1><p>{{ note.project_name or "Client call" }} - {{ note.call_date[:10] }}</p></div><a class="mac-cta" href="/app/live-call/{{ note.company_id }}">Start Follow-up Call</a></section>
+    <section class="workspace-grid two-col">
+      <article class="app-panel"><h2>Summary</h2><p>{{ note.summary }}</p><h3>Suggested follow-up email</h3><p>{{ note.suggested_follow_up_email }}</p></article>
+      <article class="app-panel"><h2>Signals</h2><dl class="detail-list"><div><dt>Objections</dt><dd>{{ note.objections or "None" }}</dd></div><div><dt>Buying signals</dt><dd>{{ note.buying_signals or "None" }}</dd></div><div><dt>Pain points</dt><dd>{{ note.pain_points or "-" }}</dd></div><div><dt>Action items</dt><dd>{{ note.action_items or "-" }}</dd></div><div><dt>Follow-up tasks</dt><dd>{{ note.follow_up_tasks or "-" }}</dd></div><div><dt>Score</dt><dd>{{ note.call_score or 0 }}%</dd></div></dl></article>
+    </section>
+    <section class="app-panel"><h2>Transcript preview</h2><pre class="transcript-pre">{{ note.transcript }}</pre></section>
+  </main>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
