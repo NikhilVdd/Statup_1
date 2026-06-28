@@ -15,6 +15,8 @@ class CallState:
         self.suggestions = []
         self.close_probability = 35
         self.sentiment = "Neutral"
+        self.call_health = "Stable"
+        self.scheduling_intent = False
         self.key_moments = []
 
     def start(self):
@@ -43,6 +45,8 @@ class CallState:
         self.suggestions.append(suggestion)
         self.close_probability = suggestion.get("close_probability", self.close_probability)
         self.sentiment = suggestion.get("sentiment", self.sentiment)
+        self.call_health = suggestion.get("call_health", self.call_health)
+        self.scheduling_intent = suggestion.get("scheduling_intent", self.scheduling_intent)
 
         objection = suggestion.get("objection_detected")
         if objection and objection != "None" and objection not in self.detected_objections:
@@ -69,5 +73,7 @@ class CallState:
             "suggestions": self.suggestions,
             "close_probability": self.close_probability,
             "sentiment": self.sentiment,
+            "call_health": self.call_health,
+            "scheduling_intent": self.scheduling_intent,
             "key_moments": self.key_moments,
         }

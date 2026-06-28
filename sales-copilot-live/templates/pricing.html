@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing | Loading...</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="site-header marketing-header">
+    <a class="brand" href="/">Loading...</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/login">Login</a>
+      <a class="nav-cta" href="/signup">Sign up</a>
+    </nav>
+  </header>
+  <main class="pricing-page">
+    <section class="section-heading">
+      <p class="eyebrow">Pricing</p>
+      <h1>Start with the live demo. Scale when your team is ready.</h1>
+    </section>
+    <section class="pricing-grid">
+      <article class="price-card">
+        <span>Starter</span>
+        <strong>$0</strong>
+        <p>For testing the real-time teleprompter flow with mock calls.</p>
+        <a class="button primary" href="/signup">Start free</a>
+      </article>
+      <article class="price-card featured">
+        <span>Team</span>
+        <strong>$49</strong>
+        <p>Per rep per month for live call coaching, summaries, and team analytics.</p>
+        <a class="button primary" href="/signup">Join waitlist</a>
+      </article>
+      <article class="price-card">
+        <span>Enterprise</span>
+        <strong>Custom</strong>
+        <p>For call centers that need CRM, telephony, compliance, and admin controls.</p>
+        <a class="button ghost-dark" href="/signup">Talk to us</a>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

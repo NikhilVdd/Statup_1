@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CloseCue AI Dashboard</title>
+  <title>Loading... Dashboard</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="/">CloseCue AI</a>
+    <a class="brand" href="/">Loading...</a>
     <nav>
       <a href="/">Home</a>
       <a href="/live-call">Live Demo</a>
+      <a href="/logout">Logout</a>
     </nav>
   </header>
 
   <main class="dashboard-shell">
     <section class="page-heading">
       <p class="eyebrow">Sales command dashboard</p>
-      <h1>Live call performance</h1>
+      <h1>Welcome{% if user %}, {{ user["name"] }}{% endif %}</h1>
     </section>
 
     <section class="stats-grid">

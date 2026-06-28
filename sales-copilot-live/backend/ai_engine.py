@@ -7,13 +7,41 @@ def generate_live_sales_suggestion(call_state):
         "objection_detected": "None",
         "sentiment": "Neutral",
         "close_probability": 42,
+        "call_health": "Stable",
         "next_action": "Ask a discovery question",
         "customer_intent": "Exploring fit",
         "urgency_level": "Medium",
         "key_moment": "Discovery is underway.",
+        "buying_signal": "None",
+        "scheduling_intent": False,
+        "suggested_meeting_title": "",
+        "suggested_meeting_time": "",
+        "suggested_meeting_agenda": "",
     }
 
-    if any(word in latest_customer for word in ["expensive", "price", "cost", "budget"]):
+    if any(phrase in latest_customer for phrase in ["set up a meeting", "schedule", "calendar", "next week", "book a time"]):
+        suggestion.update(
+            {
+                "suggested_response": (
+                    "Perfect. I can send over a focused follow-up session. To make that useful, should we center "
+                    "the meeting on live objection handling, rep onboarding, or proving ROI with your current workflow?"
+                ),
+                "objection_detected": "None",
+                "sentiment": "Positive",
+                "close_probability": 78,
+                "call_health": "Strong",
+                "next_action": "Confirm meeting scope",
+                "customer_intent": "Ready to schedule",
+                "urgency_level": "High",
+                "key_moment": "Customer signaled scheduling intent.",
+                "buying_signal": "Meeting request",
+                "scheduling_intent": True,
+                "suggested_meeting_title": "Loading... sales workflow demo",
+                "suggested_meeting_time": "Next week, 30 minutes",
+                "suggested_meeting_agenda": "Show live guidance, objection handling, and ROI workflow.",
+            }
+        )
+    elif any(word in latest_customer for word in ["expensive", "price", "cost", "budget"]):
         suggestion.update(
             {
                 "suggested_response": (
@@ -24,6 +52,7 @@ def generate_live_sales_suggestion(call_state):
                 "objection_detected": "Price concern",
                 "sentiment": "Cautious",
                 "close_probability": 48,
+                "call_health": "At risk",
                 "next_action": "Quantify ROI",
                 "customer_intent": "Evaluating cost",
                 "urgency_level": "Medium",
@@ -40,6 +69,7 @@ def generate_live_sales_suggestion(call_state):
                 "objection_detected": "Hesitation",
                 "sentiment": "Uncertain",
                 "close_probability": 40,
+                "call_health": "At risk",
                 "next_action": "Uncover the real concern",
                 "customer_intent": "Needs reassurance",
                 "urgency_level": "Medium",
@@ -57,6 +87,7 @@ def generate_live_sales_suggestion(call_state):
                 "objection_detected": "Competitor comparison",
                 "sentiment": "Comparing options",
                 "close_probability": 45,
+                "call_health": "Needs differentiation",
                 "next_action": "Differentiate live guidance",
                 "customer_intent": "Vendor comparison",
                 "urgency_level": "High",
@@ -73,6 +104,7 @@ def generate_live_sales_suggestion(call_state):
                 "objection_detected": "Proof needed",
                 "sentiment": "Interested but validating",
                 "close_probability": 62,
+                "call_health": "Promising",
                 "next_action": "Offer a targeted demo",
                 "customer_intent": "Wants proof",
                 "urgency_level": "High",
@@ -89,6 +121,7 @@ def generate_live_sales_suggestion(call_state):
                 "objection_detected": "None",
                 "sentiment": "Engaged",
                 "close_probability": 58,
+                "call_health": "Promising",
                 "next_action": "Tie value to ramp time",
                 "customer_intent": "Solving onboarding pain",
                 "urgency_level": "Medium",
@@ -99,12 +132,13 @@ def generate_live_sales_suggestion(call_state):
         suggestion.update(
             {
                 "suggested_response": (
-                    "Follow-ups are a great place to create leverage. CloseCue can capture the important moments, "
+                    "Follow-ups are a great place to create leverage. Loading... can capture the important moments, "
                     "surface next steps, and help reps leave every call with a cleaner action plan."
                 ),
                 "objection_detected": "None",
                 "sentiment": "Positive",
                 "close_probability": 56,
+                "call_health": "Stable",
                 "next_action": "Emphasize workflow automation",
                 "customer_intent": "Improving sales operations",
                 "urgency_level": "Medium",
@@ -121,10 +155,12 @@ def generate_live_sales_suggestion(call_state):
                 "objection_detected": "None",
                 "sentiment": "Positive",
                 "close_probability": 72,
+                "call_health": "Strong",
                 "next_action": "Propose a pilot",
                 "customer_intent": "Interested",
                 "urgency_level": "High",
                 "key_moment": "Customer showed buying interest.",
+                "buying_signal": "Interest",
             }
         )
 

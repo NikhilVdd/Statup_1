@@ -3,36 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CloseCue AI Live Call</title>
+  <title>Loading... Live Assistant</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="live-body">
   <header class="live-topbar">
-    <a class="brand" href="/">CloseCue AI</a>
+    <a class="brand" href="/">Loading...</a>
     <div class="call-meta">
       <span id="callStatus" class="status-pill inactive">Call Inactive</span>
       <span id="timer">00:00</span>
       <span id="micStatus">Mic idle</span>
     </div>
     <div class="call-actions">
+      <a class="button ghost" href="/dashboard">Dashboard</a>
+      <a class="button ghost" href="/logout">Logout</a>
       <button id="startCall" class="button primary" type="button">Start Call</button>
       <button id="stopCall" class="button danger" type="button">Stop Call</button>
     </div>
   </header>
 
-  <main class="live-grid">
-    <section class="panel transcript-panel">
+  <section class="consent-banner">
+    Loading... is for consent-based sales coaching. Confirm all participants have been notified before recording, transcribing, or analyzing a call.
+  </section>
+
+  <main class="app-command-grid">
+    <aside class="panel metrics-rail">
       <div class="panel-header">
-        <h1>Live transcript</h1>
-        <span id="lineCount">0 lines</span>
+        <h1>Call score</h1>
+        <span id="suggestionState">Connected</span>
       </div>
-      <div id="transcriptFeed" class="transcript-feed"></div>
-    </section>
+      <dl class="insight-list">
+        <div><dt>Call health</dt><dd id="callHealth">Stable</dd></div>
+        <div><dt>Sentiment</dt><dd id="sentiment">Neutral</dd></div>
+        <div><dt>Close probability</dt><dd id="closeProbability">35%</dd></div>
+        <div><dt>Objection type</dt><dd id="objection">None</dd></div>
+        <div><dt>Customer intent</dt><dd id="customerIntent">Exploring fit</dd></div>
+        <div><dt>Urgency level</dt><dd id="urgencyLevel">Medium</dd></div>
+      </dl>
+    </aside>
 
     <section class="panel teleprompter-panel">
       <div class="panel-header">
         <h1>AI teleprompter</h1>
-        <span id="suggestionState">Waiting</span>
+        <span id="nextAction">Ask discovery question</span>
       </div>
       <div id="suggestedResponse" class="suggested-response">Start the demo call to receive live suggested responses.</div>
       <div class="teleprompter-actions">
@@ -41,33 +54,43 @@
       </div>
     </section>
 
-    <aside class="panel insight-panel">
-      <div class="panel-header">
-        <h1>Customer insights</h1>
-      </div>
-      <dl class="insight-list">
-        <div><dt>Detected objection</dt><dd id="objection">None</dd></div>
-        <div><dt>Sentiment</dt><dd id="sentiment">Neutral</dd></div>
-        <div><dt>Close probability</dt><dd id="closeProbability">35%</dd></div>
-        <div><dt>Customer intent</dt><dd id="customerIntent">Exploring fit</dd></div>
-        <div><dt>Recommended next action</dt><dd id="nextAction">Ask discovery question</dd></div>
-        <div><dt>Urgency level</dt><dd id="urgencyLevel">Medium</dd></div>
-      </dl>
+    <aside class="right-rail">
+      <section id="schedulingPanel" class="panel scheduling-panel inactive-panel">
+        <div class="panel-header">
+          <h1>Scheduling assistant</h1>
+          <span id="scheduleStatus">Idle</span>
+        </div>
+        <p id="schedulePrompt">Listening for meeting intent such as "let's schedule" or "next week."</p>
+        <div class="booking-card">
+          <strong id="meetingTitle">No meeting suggested yet</strong>
+          <span id="meetingTime">Waiting for scheduling signal</span>
+          <p id="meetingAgenda">When intent appears, Loading... will draft the booking context.</p>
+        </div>
+      </section>
+
+      <section class="panel notes-panel">
+        <div class="panel-header">
+          <h1>Live notes</h1>
+          <span>Auto + manual</span>
+        </div>
+        <textarea id="callNotes" placeholder="Add private notes during the call..."></textarea>
+        <h2>Action items</h2>
+        <ul id="keyMoments" class="key-moments"></ul>
+      </section>
     </aside>
   </main>
 
-  <section class="bottom-grid">
-    <article class="panel">
-      <h2>Call notes</h2>
-      <textarea id="callNotes" placeholder="Add private notes during the call..."></textarea>
+  <section class="transcript-dock">
+    <article class="panel transcript-panel">
+      <div class="panel-header">
+        <h1>Live transcript</h1>
+        <span id="lineCount">0 lines</span>
+      </div>
+      <div id="transcriptFeed" class="transcript-feed compact"></div>
     </article>
-    <article class="panel">
+    <article class="panel summary-panel">
       <h2>Post-call summary</h2>
       <div id="summaryArea" class="summary-box">Stop the call to generate a mock summary.</div>
-    </article>
-    <article class="panel">
-      <h2>Key moments</h2>
-      <ul id="keyMoments" class="key-moments"></ul>
     </article>
   </section>
 

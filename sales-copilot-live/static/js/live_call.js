@@ -10,6 +10,7 @@ const demoTranscript = [
   { speaker: "Customer", text: "We are also looking at a competitor right now." },
   { speaker: "Sales Rep", text: "That makes sense. What would make one option clearly better for your team?" },
   { speaker: "Customer", text: "If it helped new reps ramp faster, we would be interested." },
+  { speaker: "Customer", text: "Let us set up a meeting next week to look at the workflow with my manager." },
 ];
 
 let callActive = false;
@@ -33,11 +34,18 @@ const refreshSuggestion = document.getElementById("refreshSuggestion");
 const objection = document.getElementById("objection");
 const sentiment = document.getElementById("sentiment");
 const closeProbability = document.getElementById("closeProbability");
+const callHealth = document.getElementById("callHealth");
 const customerIntent = document.getElementById("customerIntent");
 const nextAction = document.getElementById("nextAction");
 const urgencyLevel = document.getElementById("urgencyLevel");
 const summaryArea = document.getElementById("summaryArea");
 const keyMoments = document.getElementById("keyMoments");
+const schedulingPanel = document.getElementById("schedulingPanel");
+const scheduleStatus = document.getElementById("scheduleStatus");
+const schedulePrompt = document.getElementById("schedulePrompt");
+const meetingTitle = document.getElementById("meetingTitle");
+const meetingTime = document.getElementById("meetingTime");
+const meetingAgenda = document.getElementById("meetingAgenda");
 
 function setActiveState(isActive) {
   callActive = isActive;
@@ -132,10 +140,21 @@ function updateSuggestion(data) {
   objection.textContent = data.objection_detected;
   sentiment.textContent = data.sentiment;
   closeProbability.textContent = `${data.close_probability}%`;
+  callHealth.textContent = data.call_health || "Stable";
   customerIntent.textContent = data.customer_intent;
   nextAction.textContent = data.next_action;
   urgencyLevel.textContent = data.urgency_level;
   suggestionState.textContent = "Updated";
+
+  if (data.scheduling_intent) {
+    schedulingPanel.classList.remove("inactive-panel");
+    schedulingPanel.classList.add("active-panel");
+    scheduleStatus.textContent = "Detected";
+    schedulePrompt.textContent = "Buyer is open to a follow-up. Confirm the meeting focus before sending an invite.";
+    meetingTitle.textContent = data.suggested_meeting_title || "Loading... follow-up demo";
+    meetingTime.textContent = data.suggested_meeting_time || "Next week, 30 minutes";
+    meetingAgenda.textContent = data.suggested_meeting_agenda || "Review pain points, demo live guidance, and confirm next steps.";
+  }
 
   if (data.key_moment && data.key_moment !== "None") {
     const item = document.createElement("li");
@@ -152,6 +171,8 @@ function renderSummary(summary) {
     Objections: ${summary.detected_objections.join(", ")}<br>
     Final sentiment: ${summary.final_sentiment}<br>
     Close probability: ${summary.final_close_probability}%<br>
+    Call health: ${summary.final_call_health}<br>
+    Scheduling intent: ${summary.scheduling_intent ? "Detected" : "Not detected"}<br>
     Next action: ${summary.recommended_next_action}<br>
     Key moments: ${moments}
   `;
@@ -161,6 +182,13 @@ startCall.addEventListener("click", () => {
   transcriptFeed.innerHTML = "";
   keyMoments.innerHTML = "";
   summaryArea.textContent = "Live call in progress.";
+  schedulingPanel.classList.add("inactive-panel");
+  schedulingPanel.classList.remove("active-panel");
+  scheduleStatus.textContent = "Idle";
+  schedulePrompt.textContent = "Listening for meeting intent such as \"let's schedule\" or \"next week.\"";
+  meetingTitle.textContent = "No meeting suggested yet";
+  meetingTime.textContent = "Waiting for scheduling signal";
+  meetingAgenda.textContent = "When intent appears, Loading... will draft the booking context.";
   transcriptIndex = 0;
   requestMicrophone();
   socket.emit("start_call");

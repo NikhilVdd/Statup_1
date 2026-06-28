@@ -6,6 +6,8 @@ def build_call_summary(call_state):
         "detected_objections": call_state.detected_objections or ["None"],
         "final_sentiment": call_state.sentiment,
         "final_close_probability": call_state.close_probability,
+        "final_call_health": call_state.call_health,
+        "scheduling_intent": call_state.scheduling_intent,
         "recommended_next_action": latest_suggestion.get("next_action", "Schedule a follow-up"),
         "key_moments": call_state.key_moments[-5:],
     }

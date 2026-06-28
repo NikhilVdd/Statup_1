@@ -3,67 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CloseCue AI</title>
+  <title>Loading... | Real-time AI sales teleprompter</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="/">CloseCue AI</a>
+  <header class="site-header marketing-header">
+    <a class="brand" href="/">Loading...</a>
     <nav>
-      <a href="/dashboard">Dashboard</a>
-      <a href="/live-call">Live Demo</a>
+      <a href="#product">Product</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/login">Login</a>
+      <a class="nav-cta" href="/signup">Sign up</a>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
+    <section class="cinematic-hero">
       <div class="hero-copy">
-        <p class="eyebrow">Live sales call intelligence</p>
-        <h1>Real-Time AI Sales Teleprompter</h1>
-        <p class="hero-subtitle">CloseCue AI listens during live sales calls and tells reps what to say next.</p>
+        <p class="eyebrow">Built for consent-based sales calls</p>
+        <h1>The AI teleprompter for live sales calls.</h1>
+        <p class="hero-subtitle">Loading... listens during phone and video calls, understands what the buyer is saying, and gives reps the next best line in real time.</p>
         <div class="hero-actions">
-          <a class="button primary" href="/live-call">Launch Live Demo</a>
-          <a class="button ghost" href="/dashboard">View Dashboard</a>
+          <a class="button primary" href="/signup">Start free</a>
+          <a class="button ghost" href="/live-call">View live demo</a>
+          <a class="button ghost" href="/signup">Get for Mac</a>
         </div>
+        <p class="consent-note">Use only on calls where recording and transcription are disclosed and permitted by all applicable laws and company policies.</p>
       </div>
-      <div class="hero-signal" aria-label="CloseCue AI live suggestion preview">
-        <div class="signal-top">
+
+      <div class="product-frame" aria-label="Loading live product mockup">
+        <div class="product-topline">
           <span class="pulse"></span>
-          <span>Call Active</span>
+          <span>Live call active</span>
+          <strong>Close probability 78%</strong>
         </div>
-        <p class="prompt-preview">“I understand the price concern. Would it help if I showed how this pays for itself based on your current call volume?”</p>
-        <div class="meter">
-          <span>Close probability</span>
-          <strong>72%</strong>
+        <div class="mock-command-grid">
+          <div class="mock-score">
+            <span>Call health</span>
+            <strong>Strong</strong>
+            <span>Sentiment</span>
+            <strong>Positive</strong>
+            <span>Objection</span>
+            <strong>Proof needed</strong>
+          </div>
+          <div class="mock-prompter">
+            <span>Say next</span>
+            <p>"Let's use the follow-up session to prove this against your current workflow. Should we focus on rep ramp time or objection handling first?"</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="feature-grid">
-      <article>
-        <h2>Live call listening</h2>
-        <p>Built for active conversations with browser microphone and phone-call streaming paths ready to plug in.</p>
-      </article>
-      <article>
-        <h2>Objection detection</h2>
-        <p>Flags price, hesitation, competitor mentions, proof requests, and other moments reps need to handle fast.</p>
-      </article>
-      <article>
-        <h2>AI teleprompter</h2>
-        <p>Turns conversation context into clear suggested language the rep can use immediately.</p>
-      </article>
-      <article>
-        <h2>Sentiment scoring</h2>
-        <p>Tracks customer mood so reps know when to slow down, validate, or move toward next steps.</p>
-      </article>
-      <article>
-        <h2>Close probability</h2>
-        <p>Shows a live confidence score based on buying signals, objections, and recent conversation turns.</p>
-      </article>
-      <article>
-        <h2>Post-call summaries</h2>
-        <p>Captures key moments, objections, next actions, and follow-up direction after the call ends.</p>
-      </article>
+    <section id="product" class="section-band">
+      <div class="section-heading">
+        <p class="eyebrow">Product</p>
+        <h2>A command center for the moment that matters.</h2>
+        <p>Not a transcript analyzer after the fact. Loading... is built to support the rep while the conversation is still alive.</p>
+      </div>
+      <div class="feature-grid">
+        <article>
+          <h3>Real-time teleprompter</h3>
+          <p>Suggests what to say next based on customer objections, intent, urgency, and call context.</p>
+        </article>
+        <article>
+          <h3>Buyer signal detection</h3>
+          <p>Surfaces buying signals, competitor mentions, pricing concerns, proof requests, and scheduling intent.</p>
+        </article>
+        <article>
+          <h3>Automatic notes</h3>
+          <p>Turns live conversation moments into notes, action items, follow-ups, and post-call summaries.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="how-grid">
+      <div>
+        <p class="eyebrow">How it works</p>
+        <h2>Listen. Understand. Prompt. Summarize.</h2>
+      </div>
+      <ol class="steps">
+        <li><strong>1. Join a call</strong><span>The rep opens Loading... beside a phone or video call after consent is handled.</span></li>
+        <li><strong>2. Stream transcript</strong><span>Mock STT runs today; browser microphone, Twilio, and STT APIs plug in later.</span></li>
+        <li><strong>3. Coach live</strong><span>The assistant scores the call and updates the teleprompter every few seconds.</span></li>
+        <li><strong>4. Close the loop</strong><span>Scheduling intent, notes, summary, and next steps appear automatically.</span></li>
+      </ol>
     </section>
   </main>
 </body>
