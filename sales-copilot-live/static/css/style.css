@@ -179,6 +179,52 @@ button {
   overflow-x: hidden;
 }
 
+.marketing-page.cursor-enhanced,
+.marketing-page.cursor-enhanced a,
+.marketing-page.cursor-enhanced button {
+  cursor: none;
+}
+
+.site-cursor {
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 50%;
+  box-shadow: 0 12px 34px rgba(82, 103, 232, 0.22);
+  display: grid;
+  height: 30px;
+  justify-items: center;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transform: translate3d(-50%, -50%, 0) scale(0.82);
+  transition: opacity 160ms ease, transform 160ms ease, background 160ms ease;
+  width: 30px;
+  z-index: 9999;
+}
+
+.site-cursor::before {
+  background: linear-gradient(135deg, #6577f2, #8d6ff7);
+  border-radius: inherit;
+  box-shadow: 0 0 0 7px rgba(102, 119, 242, 0.14);
+  content: "";
+  height: 12px;
+  width: 12px;
+}
+
+.site-cursor.is-visible {
+  opacity: 1;
+}
+
+.site-cursor.is-active {
+  transform: translate3d(-50%, -50%, 0) scale(1.42);
+}
+
+.site-cursor.is-clicking {
+  transform: translate3d(-50%, -50%, 0) scale(0.72);
+}
+
 .sky-hero,
 .download-hero,
 .auth-sky {
@@ -1073,6 +1119,141 @@ button {
   border-radius: 18px;
   color: rgba(255, 255, 255, 0.58);
   padding: 18px;
+}
+
+.assist-input-demo {
+  align-items: center;
+  display: flex;
+  min-height: 64px;
+  overflow: hidden;
+  padding-right: 24px;
+  position: relative;
+  transition: border-color 220ms ease, box-shadow 220ms ease, color 220ms ease;
+}
+
+.assist-input-demo::before {
+  animation: assistFocus 7.2s ease-in-out infinite;
+  border: 1px solid rgba(102, 119, 242, 0.8);
+  border-radius: inherit;
+  box-shadow: 0 0 0 5px rgba(102, 119, 242, 0.16);
+  content: "";
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.assist-placeholder {
+  animation: placeholderFade 7.2s ease-in-out infinite;
+  left: 18px;
+  position: absolute;
+  right: 18px;
+}
+
+.assist-typed {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: var(--type-light);
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.typing-caret {
+  animation: caretBlink 900ms steps(2, end) infinite;
+  background: #dfe7ff;
+  border-radius: 999px;
+  display: inline-block;
+  height: 22px;
+  opacity: 0;
+  position: relative;
+  width: 2px;
+  z-index: 1;
+}
+
+.assist-input-demo.is-typing .typing-caret {
+  opacity: 1;
+}
+
+.demo-person-cursor {
+  animation: demoCursorClick 7.2s cubic-bezier(0.66, 0, 0.2, 1) infinite;
+  bottom: -22px;
+  height: 30px;
+  left: 52%;
+  pointer-events: none;
+  position: absolute;
+  width: 24px;
+}
+
+.demo-person-cursor::before {
+  border-left: 13px solid #ffffff;
+  border-top: 20px solid transparent;
+  content: "";
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.26));
+  height: 0;
+  left: 0;
+  position: absolute;
+  top: 10px;
+  transform: rotate(-18deg);
+  width: 0;
+}
+
+.demo-person-cursor::after {
+  animation: clickRipple 7.2s ease-in-out infinite;
+  border: 2px solid rgba(136, 160, 255, 0.92);
+  border-radius: 50%;
+  content: "";
+  height: 32px;
+  left: -12px;
+  opacity: 0;
+  position: absolute;
+  top: -2px;
+  width: 32px;
+}
+
+.cursor-name {
+  background: linear-gradient(135deg, #6577f2, #8d6ff7);
+  border-radius: 999px;
+  box-shadow: 0 10px 20px rgba(49, 62, 120, 0.26);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: var(--type-medium);
+  left: 12px;
+  line-height: 1;
+  padding: 7px 10px;
+  position: absolute;
+  top: -8px;
+  white-space: nowrap;
+}
+
+@keyframes assistFocus {
+  0%, 18%, 84%, 100% { opacity: 0; }
+  24%, 72% { opacity: 1; }
+}
+
+@keyframes placeholderFade {
+  0%, 24% { opacity: 1; transform: translateY(0); }
+  32%, 76% { opacity: 0; transform: translateY(-8px); }
+  88%, 100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes caretBlink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes demoCursorClick {
+  0% { opacity: 0; transform: translate3d(120px, 54px, 0) scale(0.96); }
+  16% { opacity: 1; transform: translate3d(52px, 12px, 0) scale(1); }
+  24% { opacity: 1; transform: translate3d(20px, -6px, 0) scale(0.88); }
+  31% { opacity: 1; transform: translate3d(24px, -2px, 0) scale(1); }
+  72% { opacity: 1; transform: translate3d(156px, -2px, 0) scale(1); }
+  84%, 100% { opacity: 0; transform: translate3d(190px, 18px, 0) scale(0.96); }
+}
+
+@keyframes clickRipple {
+  0%, 20%, 100% { opacity: 0; transform: scale(0.4); }
+  24% { opacity: 0.9; transform: scale(0.55); }
+  34% { opacity: 0; transform: scale(1.35); }
 }
 
 .notes-section {

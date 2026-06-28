@@ -1,4 +1,28 @@
 const nav = document.querySelector("[data-nav]");
+const marketingPage = document.body.classList.contains("marketing-page");
+
+if (marketingPage && window.matchMedia("(pointer: fine)").matches) {
+  const cursor = document.createElement("div");
+  cursor.className = "site-cursor";
+  cursor.setAttribute("aria-hidden", "true");
+  document.body.appendChild(cursor);
+  document.body.classList.add("cursor-enhanced");
+
+  window.addEventListener("pointermove", (event) => {
+    cursor.style.left = `${event.clientX}px`;
+    cursor.style.top = `${event.clientY}px`;
+    cursor.classList.add("is-visible");
+  });
+
+  window.addEventListener("pointerdown", () => cursor.classList.add("is-clicking"));
+  window.addEventListener("pointerup", () => cursor.classList.remove("is-clicking"));
+  document.documentElement.addEventListener("mouseleave", () => cursor.classList.remove("is-visible"));
+
+  document.querySelectorAll("a, button, .assist-input-demo, .mini-card").forEach((target) => {
+    target.addEventListener("mouseenter", () => cursor.classList.add("is-active"));
+    target.addEventListener("mouseleave", () => cursor.classList.remove("is-active"));
+  });
+}
 
 if (nav) {
   const updateNav = () => {
@@ -94,4 +118,39 @@ document.querySelectorAll("[data-score-ring]").forEach((ring, index) => {
       valueNode.textContent = score;
     }
   }, 1400 + index * 220);
+});
+
+document.querySelectorAll("[data-assist-type-demo]").forEach((demo) => {
+  const typed = demo.querySelector("[data-assist-typed]");
+  const prompt = "Give me a softer ROI response for the price concern.";
+  let index = 0;
+
+  const runDemo = () => {
+    index = 0;
+    demo.classList.remove("is-typing");
+    if (typed) {
+      typed.textContent = "";
+    }
+
+    window.setTimeout(() => {
+      demo.classList.add("is-typing");
+      const typeInterval = window.setInterval(() => {
+        if (!typed) {
+          window.clearInterval(typeInterval);
+          return;
+        }
+
+        typed.textContent = prompt.slice(0, index);
+        index += 1;
+
+        if (index > prompt.length) {
+          window.clearInterval(typeInterval);
+          window.setTimeout(() => demo.classList.remove("is-typing"), 1200);
+        }
+      }, 54);
+    }, 2100);
+  };
+
+  runDemo();
+  window.setInterval(runDemo, 7200);
 });
