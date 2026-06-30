@@ -23,6 +23,17 @@
     <section class="sky-hero">
       <div class="sky-streaks" aria-hidden="true"></div>
       <div class="sun-glow"></div>
+      <div class="hero-birds" aria-hidden="true">
+        <svg class="silhouette-bird bird-one" viewBox="0 0 220 90">
+          <path d="M5 52 C42 22, 78 16, 96 42 C103 52, 112 52, 122 44 C144 25, 176 28, 216 58 C174 44, 150 44, 129 62 C113 76, 94 73, 82 56 C65 34, 39 34, 5 52 Z" />
+        </svg>
+        <svg class="silhouette-bird bird-two" viewBox="0 0 220 90">
+          <path d="M6 55 C45 28, 82 24, 100 47 C108 58, 118 58, 130 48 C153 27, 184 31, 216 57 C178 45, 151 48, 130 67 C113 82, 92 77, 80 59 C63 36, 39 38, 6 55 Z" />
+        </svg>
+        <svg class="silhouette-bird bird-three" viewBox="0 0 220 90">
+          <path d="M4 54 C43 22, 79 17, 98 44 C106 56, 116 56, 128 47 C151 28, 182 30, 216 59 C178 47, 150 47, 128 66 C110 82, 90 78, 78 60 C62 36, 36 36, 4 54 Z" />
+        </svg>
+      </div>
       <div class="horizon-glow" aria-hidden="true"></div>
       <div class="mountain mountain-back"></div>
       <div class="mountain mountain-mid"></div>
@@ -149,28 +160,51 @@
         <h2>Real-time sales notes</h2>
         <p>Every objection, pain point, and next step captured automatically.</p>
       </div>
-      <div class="notes-window">
+      <div class="live-notes-demo notes-window">
         <div class="window-chrome">
           <span class="dot red"></span>
           <span class="dot yellow"></span>
           <span class="dot green"></span>
-          <span class="window-title">Call Notes</span>
+          <span class="window-title">Loading... Live Sales Notes</span>
         </div>
-        <div class="notes-body">
-          <p class="note-date">Today, 10:42 AM</p>
-          <h3>Demo Call with Acme Sales Team</h3>
-          <div class="note-tabs">
-            <span>Summary</span>
-            <span>Transcript</span>
-            <span>Action Items</span>
+        <div class="live-call-stage">
+          <div class="meeting-frame" aria-label="Professional sales meeting video call">
+            <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80" alt="Professional sales team in a meeting">
+            <div class="meeting-overlay">
+              <span class="live-badge"><i></i>Live sales call</span>
+              <div class="speaker-card active-speaker">Buyer: We like it, but price is a concern.</div>
+              <div class="video-controls">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
           </div>
-          <ul>
-            <li>Customer struggles to train new reps</li>
-            <li>Price concern mentioned</li>
-            <li>Competitor being evaluated</li>
-            <li>Follow-up demo requested</li>
-            <li>Send calendar invite for next week</li>
-          </ul>
+          <div class="ai-notes-panel">
+            <div class="ai-panel-header">
+              <span class="assistant-orb dark"></span>
+              <div>
+                <strong>Loading... is listening</strong>
+                <small>Notes and replies updating live</small>
+              </div>
+            </div>
+            <div class="ai-note-stream">
+              <div class="ai-note-line line-one">
+                <span>Objection</span>
+                <p>Price concern mentioned during implementation discussion.</p>
+              </div>
+              <div class="ai-note-line line-two">
+                <span>Pain point</span>
+                <p>New reps need faster coaching and better call consistency.</p>
+              </div>
+              <div class="ai-reply-bubble">
+                <span>Suggested reply</span>
+                <p>"Let's compare the cost to rep ramp time saved over the next quarter."</p>
+              </div>
+              <div class="ai-note-line line-three">
+                <span>Next step</span>
+                <p>Book a 30-minute follow-up with sales leadership next week.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -10,9 +10,9 @@ This version uses mock transcription and keyword-based AI logic, but the structu
 - Backend: Python Flask
 - Real-time communication: Flask-SocketIO
 - Auth: simple Flask session auth
-- Database: SQLite for MVP, isolated behind `backend/database.py`
+- Database: SQLite locally, optional Firebase Firestore for production, isolated behind `backend/database.py`
 - Demo audio/transcription: mocked
-- Demo AI: keyword-based mock engine
+- AI suggestions: OpenAI-compatible provider when configured, keyword mock fallback otherwise
 
 ## Product Areas
 
@@ -53,8 +53,9 @@ http://localhost:5001
 6. The live assistant opens at `/app/live-call/<company_id>` with the selected company context.
 7. Click `Start Call`.
 8. The mock transcript streams into Flask-SocketIO.
-9. The backend updates call state and returns live suggestions, call health, sentiment, close probability, objections, intent, urgency, and scheduling signals.
-10. Click `Stop Call` to generate and save the post-call notes to that client.
+9. Optionally type a buyer sentence into the manual transcript box to test the teleprompter against your own sales scenario.
+10. The backend updates call state and returns live suggestions, call health, sentiment, close probability, objections, intent, urgency, and scheduling signals.
+11. Click `Stop Call` to generate and save the post-call notes to that client.
 
 ## Dashboard And CRM
 
@@ -79,15 +80,43 @@ Starting a call from a client page sends that company's context into the live as
 - Known pain points
 - Product or service being sold
 
-The mock AI suggestions use that context when generating teleprompter responses. When the rep stops the call, Loading... saves the generated summary, transcript, objections, buying signals, action items, follow-up tasks, call score, close probability, and sentiment to SQLite.
+AI suggestions use that context when generating teleprompter responses. When the rep stops the call, Loading... saves the generated summary, transcript, objections, buying signals, action items, follow-up tasks, call score, close probability, and sentiment to the configured database.
 
 If the call was launched from a meeting, the saved note is linked to that meeting. If no meeting is selected, the note is saved as a general call note for the company.
 
+## Real AI Teleprompter
+
+The teleprompter has a provider layer in `backend/ai_provider.py`.
+
+By default, Loading... runs in `auto` mode:
+
+- If `OPENAI_API_KEY` is set, live suggestions come from the configured AI model.
+- If no key is set, the app falls back to the local keyword mock engine.
+- If the provider has an error during a call, the app keeps running and shows a mock fallback suggestion.
+
+To enable real AI suggestions:
+
+```bash
+cp .env.example .env
+```
+
+Then set:
+
+```text
+AI_PROVIDER=auto
+OPENAI_MODEL=gpt-4o-mini
+OPENAI_API_KEY=your-api-key-here
+```
+
+Restart the Flask app after changing `.env`.
+
+On the live-call page, the pill in the top bar shows whether the current call is using `Real AI`, `Mock AI`, or `Mock fallback`.
+
 ## Database
 
-SQLite is initialized automatically on app startup through `backend/database.py`.
+SQLite is the default local database and is initialized automatically on app startup through `backend/database.py`.
 
-Current MVP tables:
+Current MVP data models:
 
 - `users`
 - `companies`
@@ -95,16 +124,50 @@ Current MVP tables:
 - `call_notes`
 - `activity_timeline`
 
-The schema keeps database access isolated behind helper functions so PostgreSQL can replace SQLite later without rewriting the templates.
+The database access is isolated behind helper functions, so the same Flask routes can use SQLite locally or Firebase Firestore in production.
+
+### Firebase Firestore
+
+To use Firebase Firestore instead of SQLite:
+
+1. Create a Firebase project.
+2. Enable Firestore Database.
+3. Create a Firebase Admin service account key.
+4. Save the key locally outside git, for example:
+
+```text
+firebase-service-account.json
+```
+
+5. Update `.env`:
+
+```text
+DATABASE_PROVIDER=firebase
+FIREBASE_PROJECT_ID=your-firebase-project-id
+FIREBASE_CREDENTIALS_PATH=/absolute/path/to/firebase-service-account.json
+```
+
+You can also provide the service account as JSON in `FIREBASE_CREDENTIALS_JSON` for hosts that store secrets as environment variables.
+
+Never commit Firebase service account JSON files. `.gitignore` already ignores common service account filenames.
+
+Firestore collections used by the app:
+
+- `users`
+- `companies`
+- `meetings`
+- `call_notes`
+- `activity_timeline`
+- `_metadata` for numeric ID counters
 
 ## What Is Mocked Right Now
 
 - Speech-to-text is mocked in `backend/transcription_engine.py`.
-- AI sales coaching is keyword-based in `backend/ai_engine.py`.
+- AI sales coaching uses the real AI provider when `OPENAI_API_KEY` is configured; otherwise it falls back to keyword-based logic in `backend/ai_engine.py`.
 - The live call transcript is generated in `static/js/live_call.js`.
 - Call state is in memory per Socket.IO session.
-- Users are persisted in local SQLite through `backend/database.py`.
-- CRM companies, meetings, notes, and timeline records are real SQLite records.
+- Users are persisted through `backend/database.py`.
+- CRM companies, meetings, notes, and timeline records are real database records.
 - Calendar booking and CRM integrations are still mocked/manual.
 
 ## Where To Add Real Speech-To-Text
@@ -125,7 +188,7 @@ Then update `backend/transcription_engine.py` to stream chunks into:
 
 ## Where To Add Real AI
 
-Replace the keyword logic in `backend/ai_engine.py` with an OpenAI API call. Keep the same response shape so the frontend remains stable while the intelligence improves.
+Real AI suggestions are routed through `backend/ai_provider.py`. Keep the same response shape so the frontend remains stable while the intelligence improves.
 
 ## Future Integrations
 
@@ -135,6 +198,7 @@ Replace the keyword logic in `backend/ai_engine.py` with an OpenAI API call. Kee
 - OpenAI API for real-time suggestions
 - CRM integrations
 - Calendar integrations
-- PostgreSQL replacement for SQLite
+- Firebase security rules and production auth hardening
+- PostgreSQL replacement for SQLite if needed later
 - Electron or Tauri wrapper for Mac
 - Manual note creation and richer task management

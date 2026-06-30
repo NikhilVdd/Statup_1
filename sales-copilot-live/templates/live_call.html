@@ -13,6 +13,7 @@
       <span id="callStatus" class="status-pill inactive">Call Inactive</span>
       <span id="timer" class="timer-pill">00:00</span>
       <span id="micStatus" class="mic-pill">Mic idle</span>
+      <span id="aiMode" class="ai-mode-pill {{ 'real' if ai_status.enabled else 'mock' }}">{{ ai_status.label }}{% if ai_status.model %}: {{ ai_status.model }}{% endif %}</span>
     </div>
     <div class="call-actions">
       <a class="secondary-cta small" href="/dashboard">Dashboard</a>
@@ -61,7 +62,7 @@
           <span class="panel-kicker">Say this next</span>
           <h1>AI teleprompter</h1>
         </div>
-        <span id="suggestionState" class="confidence-pill">Connected</span>
+        <span id="suggestionState" class="confidence-pill">{{ ai_status.label }}</span>
       </div>
       <div id="suggestedResponse" class="suggested-response">Start the demo call to receive live suggested responses.</div>
       <div class="teleprompter-footer">
@@ -135,6 +136,10 @@
         <span id="lineCount">0 lines</span>
       </div>
       <div id="transcriptFeed" class="transcript-feed compact"></div>
+      <div class="manual-transcript-input">
+        <input id="manualTranscript" type="text" placeholder="Type what the customer just said..." autocomplete="off">
+        <button id="sendManualTranscript" class="mac-cta small" type="button">Send to AI</button>
+      </div>
     </article>
     <article class="app-panel summary-panel">
       <span class="panel-kicker">After call</span>

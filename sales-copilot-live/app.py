@@ -9,6 +9,7 @@ from flask_socketio import SocketIO, emit
 from dotenv import load_dotenv
 
 from backend.ai_engine import generate_live_sales_suggestion
+from backend.ai_provider import ai_provider_status
 from backend.call_state import CallState
 from backend.database import (
     create_call_note,
@@ -159,7 +160,7 @@ def app_home():
 @app.route("/live-call")
 @login_required
 def live_call():
-    return render_template("live_call.html", user=current_user(), company=None, meeting=None)
+    return render_template("live_call.html", user=current_user(), company=None, meeting=None, ai_status=ai_provider_status())
 
 
 @app.route("/app/live-call/<int:company_id>")
@@ -170,7 +171,7 @@ def live_call_for_company(company_id):
         abort(404)
     meeting_id = request.args.get("meeting_id", type=int)
     meeting = get_meeting(current_user_id(), meeting_id) if meeting_id else None
-    return render_template("live_call.html", user=current_user(), company=company, meeting=meeting)
+    return render_template("live_call.html", user=current_user(), company=company, meeting=meeting, ai_status=ai_provider_status())
 
 
 @app.route("/companies")

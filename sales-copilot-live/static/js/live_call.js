@@ -25,9 +25,12 @@ const meetingId = document.body.dataset.meetingId;
 const callStatus = document.getElementById("callStatus");
 const timer = document.getElementById("timer");
 const micStatus = document.getElementById("micStatus");
+const aiMode = document.getElementById("aiMode");
 const startCall = document.getElementById("startCall");
 const stopCall = document.getElementById("stopCall");
 const transcriptFeed = document.getElementById("transcriptFeed");
+const manualTranscript = document.getElementById("manualTranscript");
+const sendManualTranscript = document.getElementById("sendManualTranscript");
 const lineCount = document.getElementById("lineCount");
 const suggestedResponse = document.getElementById("suggestedResponse");
 const suggestionState = document.getElementById("suggestionState");
@@ -130,6 +133,19 @@ function sendNextTranscriptLine() {
   socket.emit("transcript_update", line);
 }
 
+function sendManualCustomerLine() {
+  const text = manualTranscript?.value.trim();
+  if (!text || !callActive) {
+    return;
+  }
+
+  const line = { speaker: "Customer", text };
+  appendTranscriptLine(line);
+  socket.emit("transcript_update", line);
+  manualTranscript.value = "";
+  suggestionState.textContent = "Thinking";
+}
+
 function startMockTranscript() {
   clearInterval(transcriptInterval);
   sendNextTranscriptLine();
@@ -152,7 +168,24 @@ function updateSuggestion(data) {
   nextAction.textContent = data.next_action;
   urgencyLevel.textContent = data.urgency_level;
   confidenceScore.textContent = `Confidence ${Math.max(58, data.close_probability || 74)}%`;
-  suggestionState.textContent = "Updated";
+
+  if (data.ai_mode === "real_ai") {
+    suggestionState.textContent = "Real AI";
+    if (aiMode) {
+      aiMode.textContent = `Real AI: ${data.ai_model || "OpenAI"}`;
+      aiMode.classList.add("real");
+      aiMode.classList.remove("mock");
+    }
+  } else if (data.ai_mode === "mock_fallback") {
+    suggestionState.textContent = "Mock fallback";
+    if (aiMode) {
+      aiMode.textContent = "Mock fallback";
+      aiMode.classList.add("mock");
+      aiMode.classList.remove("real");
+    }
+  } else {
+    suggestionState.textContent = "Mock AI";
+  }
 
   if (data.scheduling_intent) {
     schedulingPanel.classList.remove("inactive-panel");
@@ -219,6 +252,14 @@ copyResponse.addEventListener("click", async () => {
 
 refreshSuggestion.addEventListener("click", () => {
   socket.emit("request_ai_suggestion");
+});
+
+sendManualTranscript?.addEventListener("click", sendManualCustomerLine);
+manualTranscript?.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    sendManualCustomerLine();
+  }
 });
 
 copySchedule.addEventListener("click", async () => {

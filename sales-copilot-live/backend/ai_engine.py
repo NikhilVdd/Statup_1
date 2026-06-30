@@ -1,24 +1,34 @@
+from backend.ai_provider import DEFAULT_SUGGESTION, ai_provider_status, generate_openai_suggestion
+
+
 def generate_live_sales_suggestion(call_state):
+    status = ai_provider_status()
+
+    if status["mode"] == "openai":
+        try:
+            suggestion = generate_openai_suggestion(call_state)
+            if suggestion:
+                suggestion["ai_mode"] = "real_ai"
+                suggestion["ai_model"] = status["model"]
+                return apply_company_context(suggestion, call_state.company_context or {})
+        except RuntimeError as error:
+            fallback = generate_mock_sales_suggestion(call_state)
+            fallback["ai_mode"] = "mock_fallback"
+            fallback["ai_error"] = str(error)
+            return fallback
+
+    suggestion = generate_mock_sales_suggestion(call_state)
+    suggestion["ai_mode"] = "mock"
+    suggestion["ai_model"] = status["model"]
+    return suggestion
+
+
+def generate_mock_sales_suggestion(call_state):
     recent_text = call_state.recent_transcript_text()
     latest_customer = call_state.latest_customer_message.lower()
     company = call_state.company_context or {}
 
-    suggestion = {
-        "suggested_response": "Ask one focused discovery question, then connect the answer to a clear business outcome.",
-        "objection_detected": "None",
-        "sentiment": "Neutral",
-        "close_probability": 42,
-        "call_health": "Stable",
-        "next_action": "Ask a discovery question",
-        "customer_intent": "Exploring fit",
-        "urgency_level": "Medium",
-        "key_moment": "Discovery is underway.",
-        "buying_signal": "None",
-        "scheduling_intent": False,
-        "suggested_meeting_title": "",
-        "suggested_meeting_time": "",
-        "suggested_meeting_agenda": "",
-    }
+    suggestion = DEFAULT_SUGGESTION.copy()
 
     if any(phrase in latest_customer for phrase in ["set up a meeting", "schedule", "calendar", "next week", "book a time"]):
         suggestion.update(

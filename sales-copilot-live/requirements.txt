@@ -2,3 +2,5 @@ Flask
 Flask-SocketIO
 python-dotenv
 eventlet
+cryptography==42.0.8
+firebase-admin
