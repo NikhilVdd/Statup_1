@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#6c7cff">
+  <title>Loading... Arena Record</title>
+  <link rel="manifest" href="/pwa/manifest.json">
+  <link rel="stylesheet" href="/pwa/static/css/pwa.css">
+  <script src="/pwa/static/js/pwa.js" defer></script>
+</head>
+<body class="pwa-app-shell">
+  <main class="pwa-screen">
+    <header class="pwa-top-bar">
+      <a class="pwa-logo-link" href="/pwa">Loading...</a>
+      <span class="pwa-top-pill">Challenge</span>
+    </header>
+
+    <section class="pwa-record-card">
+      <p class="pwa-eyebrow">60-second pitch</p>
+      <h1>Convince them to buy.</h1>
+      <div class="pwa-challenge-grid">
+        <div><span>Product</span><strong>Smart water bottle</strong></div>
+        <div><span>Buyer</span><strong>College student who forgets to drink water</strong></div>
+        <div><span>Goal</span><strong>Convince them to buy in 60 seconds</strong></div>
+      </div>
+      <div id="pwa-record-timer" class="pwa-record-timer">60</div>
+      <div class="pwa-record-status" id="pwa-record-status">Ready to record</div>
+      <div class="pwa-record-actions">
+        <button id="pwa-start-recording" class="pwa-button pwa-button-primary" type="button">Start Recording</button>
+        <button id="pwa-stop-recording" class="pwa-button pwa-button-secondary" type="button">Stop Recording</button>
+        <button id="pwa-submit-pitch" class="pwa-button pwa-button-ghost" type="button">Submit Pitch</button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="pwa-bottom-nav" aria-label="Arena navigation">
+    <a class="pwa-nav-item" href="/pwa">Home</a>
+    <a class="pwa-nav-item" href="/pwa/feed">Feed</a>
+    <a class="pwa-nav-item pwa-nav-record pwa-nav-active" href="/pwa/record">Record</a>
+    <a class="pwa-nav-item" href="/pwa/leaderboard">Leaders</a>
+    <a class="pwa-nav-item" href="/pwa/profile">Profile</a>
+  </nav>
+</body>
+</html>

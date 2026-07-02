@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#6c7cff">
+  <title>Loading... Arena Feed</title>
+  <link rel="manifest" href="/pwa/manifest.json">
+  <link rel="stylesheet" href="/pwa/static/css/pwa.css">
+  <script src="/pwa/static/js/pwa.js" defer></script>
+</head>
+<body class="pwa-app-shell">
+  <main class="pwa-feed-screen">
+    <header class="pwa-top-bar">
+      <a class="pwa-logo-link" href="/pwa">Loading...</a>
+      <span class="pwa-top-pill">Pitch feed</span>
+    </header>
+
+    <section class="pwa-feed-stack" aria-label="Pitch feed">
+      <article class="pwa-pitch-card">
+        <div class="pwa-video-card pwa-video-blue">
+          <span class="pwa-video-label">Pitch #128</span>
+          <div class="pwa-play-dot"></div>
+        </div>
+        <div class="pwa-pitch-meta">
+          <span class="pwa-creator">@maya</span>
+          <h1>Smart water bottle</h1>
+          <p>For students who forget to hydrate between classes.</p>
+          <div class="pwa-score-row">
+            <span>Audience score <strong>92</strong></span>
+            <span>Buy <strong>81%</strong></span>
+            <span>Invest <strong>46%</strong></span>
+          </div>
+        </div>
+        <div class="pwa-feed-actions">
+          <button type="button">Like</button>
+          <button type="button">Comment</button>
+          <button type="button">Vote</button>
+          <a href="/pwa/record">Beat This Pitch</a>
+        </div>
+      </article>
+
+      <article class="pwa-pitch-card">
+        <div class="pwa-video-card pwa-video-purple">
+          <span class="pwa-video-label">Pitch #129</span>
+          <div class="pwa-play-dot"></div>
+        </div>
+        <div class="pwa-pitch-meta">
+          <span class="pwa-creator">@niko</span>
+          <h1>Desk treadmill</h1>
+          <p>For remote workers who want movement without breaking focus.</p>
+          <div class="pwa-score-row">
+            <span>Audience score <strong>88</strong></span>
+            <span>Buy <strong>73%</strong></span>
+            <span>Invest <strong>39%</strong></span>
+          </div>
+        </div>
+        <div class="pwa-feed-actions">
+          <button type="button">Like</button>
+          <button type="button">Comment</button>
+          <button type="button">Vote</button>
+          <a href="/pwa/record">Beat This Pitch</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <nav class="pwa-bottom-nav" aria-label="Arena navigation">
+    <a class="pwa-nav-item" href="/pwa">Home</a>
+    <a class="pwa-nav-item pwa-nav-active" href="/pwa/feed">Feed</a>
+    <a class="pwa-nav-item pwa-nav-record" href="/pwa/record">Record</a>
+    <a class="pwa-nav-item" href="/pwa/leaderboard">Leaders</a>
+    <a class="pwa-nav-item" href="/pwa/profile">Profile</a>
+  </nav>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "Loading... Arena",
+  "short_name": "Arena",
+  "description": "A mobile pitch challenge arena for 60-second sales battles.",
+  "start_url": "/pwa",
+  "scope": "/pwa/",
+  "display": "standalone",
+  "background_color": "#eff8ff",
+  "theme_color": "#6c7cff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/pwa/static/icons/pwa-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

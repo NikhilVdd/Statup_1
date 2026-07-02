@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#eff8ff"/>
+  <circle cx="370" cy="116" r="96" fill="#d7e3ff"/>
+  <rect x="86" y="112" width="340" height="288" rx="72" fill="#6377ff"/>
+  <path d="M154 304c44-86 105-129 182-129 36 0 66 9 90 28v102c-30-32-64-48-102-48-54 0-99 28-136 85l-34-38Z" fill="#fff"/>
+  <text x="256" y="358" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Arial,sans-serif" font-size="54" font-weight="700" fill="#ffffff">60</text>
+</svg>

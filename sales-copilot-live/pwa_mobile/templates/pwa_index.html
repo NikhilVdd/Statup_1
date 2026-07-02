@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#6c7cff">
+  <title>Loading... Arena</title>
+  <link rel="manifest" href="/pwa/manifest.json">
+  <link rel="stylesheet" href="/pwa/static/css/pwa.css">
+  <script src="/pwa/static/js/pwa.js" defer></script>
+</head>
+<body class="pwa-app-shell">
+  <main class="pwa-screen pwa-home-screen">
+    <aside id="pwa-install-sheet" class="pwa-install-sheet" aria-live="polite">
+      <button id="pwa-install-close" class="pwa-install-close" type="button" aria-label="Close install instructions">Close</button>
+      <span class="pwa-install-kicker">Install on iPhone</span>
+      <strong>Add Loading... Arena to your Home Screen</strong>
+      <ol>
+        <li>Open this page in Safari.</li>
+        <li>Tap the Share button.</li>
+        <li>Choose Add to Home Screen.</li>
+      </ol>
+    </aside>
+
+    <section class="pwa-hero">
+      <div class="pwa-logo">Loading...</div>
+      <p class="pwa-eyebrow">Arena</p>
+      <h1>Sell it in 60 seconds.</h1>
+      <p class="pwa-subtitle">Pitch products, challenge friends, and climb the leaderboard.</p>
+      <div class="pwa-action-stack">
+        <a class="pwa-button pwa-button-primary" href="/pwa/record">Start Pitch Challenge</a>
+        <a class="pwa-button pwa-button-secondary" href="/pwa/feed">Watch Feed</a>
+        <button id="pwa-install-button" class="pwa-button pwa-button-ghost" type="button">Install App</button>
+      </div>
+    </section>
+
+    <section class="pwa-preview-card">
+      <div class="pwa-phone-video">
+        <span class="pwa-live-pill">60 sec pitch</span>
+        <div class="pwa-video-glow"></div>
+      </div>
+      <div class="pwa-preview-copy">
+        <span>Today&apos;s challenge</span>
+        <strong>Sell a smart water bottle to a busy student.</strong>
+        <p>Community votes decide who has the strongest close.</p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="pwa-bottom-nav" aria-label="Arena navigation">
+    <a class="pwa-nav-item pwa-nav-active" href="/pwa">Home</a>
+    <a class="pwa-nav-item" href="/pwa/feed">Feed</a>
+    <a class="pwa-nav-item pwa-nav-record" href="/pwa/record">Record</a>
+    <a class="pwa-nav-item" href="/pwa/leaderboard">Leaders</a>
+    <a class="pwa-nav-item" href="/pwa/profile">Profile</a>
+  </nav>
+</body>
+</html>

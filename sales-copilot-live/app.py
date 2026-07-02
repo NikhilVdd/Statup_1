@@ -1,12 +1,14 @@
 import os
 import json
 from functools import wraps
+from pathlib import Path
 
 from datetime import datetime, timezone
 
-from flask import Flask, abort, flash, redirect, render_template, request, session, url_for
+from flask import Flask, abort, flash, redirect, render_template, request, send_from_directory, session, url_for
 from flask_socketio import SocketIO, emit
 from dotenv import load_dotenv
+from jinja2 import ChoiceLoader, FileSystemLoader
 
 from backend.ai_engine import generate_live_sales_suggestion
 from backend.ai_provider import ai_provider_status
@@ -34,7 +36,13 @@ from backend.utils import build_call_summary
 
 load_dotenv()
 
+BASE_DIR = Path(__file__).resolve().parent
+PWA_DIR = BASE_DIR / "pwa_mobile"
+PWA_STATIC_DIR = PWA_DIR / "static"
+PWA_TEMPLATE_DIR = PWA_DIR / "templates"
+
 app = Flask(__name__)
+app.jinja_loader = ChoiceLoader([app.jinja_loader, FileSystemLoader(PWA_TEMPLATE_DIR)])
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "loading-demo-secret")
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
 init_db()
@@ -85,6 +93,48 @@ def pricing():
 @app.route("/download")
 def download():
     return render_template("download.html")
+
+
+@app.route("/pwa")
+def pwa_index():
+    return render_template("pwa_index.html", pwa_page="home")
+
+
+@app.route("/pwa/feed")
+def pwa_feed():
+    return render_template("pwa_feed.html", pwa_page="feed")
+
+
+@app.route("/pwa/record")
+def pwa_record():
+    return render_template("pwa_record.html", pwa_page="record")
+
+
+@app.route("/pwa/leaderboard")
+def pwa_leaderboard():
+    return render_template("pwa_leaderboard.html", pwa_page="leaderboard")
+
+
+@app.route("/pwa/profile")
+def pwa_profile():
+    return render_template("pwa_profile.html", pwa_page="profile")
+
+
+@app.route("/pwa/manifest.json")
+def pwa_manifest():
+    return send_from_directory(PWA_STATIC_DIR, "manifest.json", mimetype="application/manifest+json")
+
+
+@app.route("/pwa/service-worker.js")
+def pwa_service_worker():
+    response = send_from_directory(PWA_STATIC_DIR, "service-worker.js", mimetype="application/javascript")
+    response.headers["Service-Worker-Allowed"] = "/pwa/"
+    return response
+
+
+@app.route("/pwa/static/<path:filename>")
+def pwa_static(filename):
+    return send_from_directory(PWA_STATIC_DIR, filename)
 
 
 @app.route("/signup", methods=["GET", "POST"])
